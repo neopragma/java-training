@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 7: Properties</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-6-debrief.html" title="previous">&lt;= Unit 6: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-7-debrief.html" title="next">Unit 7: Debrief =&gt;</a>
+<h1>Unit 7: Properties</h1>
+<p>
+It's often useful to externalize certain data so that applications can be deployed in different environments and so that various runtime configuration options can be set without having to recompile the code. In Java applications, you can use any sort of file or database to support this. The basic mechanism is to use a Java <em>properties</em> file, which can easily be loaded into a <span class="code">Properties</span> instance by the application. 
+</p>
+<p>
+The goals of this unit are:
+<ol>
+<li>Learn how to load a <span class="code">Properties</span> instance and query the values it contains;</li>
+<li>Learn the different ways to locate a <span class="code">.properties</span> file.</li> 
+</ol>
+</p>
+<p>
+The first step is to set up an Eclipse/Maven project for the unit, named <em>properties</em>. You can copy the POM from Unit 4 and change the names of things; the structure and dependencies defined in the POM are the same for this unit.
+</p>
+<p>
+Here is the User Story for this unit:
+</p>
+<div class="code box">
+<pre>
+  Feature:
+    As a Java programmer, I want to learn how to use Java properties files
+    so that I can externalize runtime data.
+
+  Scenario: Locating and reading properties files
+    Given a properties file located in the project root directory
+    When I open it as a FileInputStream using a relative path
+    Then I can read it and populate a Properties object
+
+    Given a properties file located in the project root directory
+    When I open it with ClassLoader.getResourceAsStream using a relative path
+    Then I can read it and populate a Properties object
+</pre>
+</div>
+</p>
+<p>
+</p>
+</body>
+</html>

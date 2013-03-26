@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 2: Classpath and Packages</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-1-debrief.html" title="previous">&lt;= Unit 1: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-2-debrief.html" title="next">Unit 2: Debrief =&gt;</a>
+<h1>Unit 2: Classpath and Packages</h1>
+<p>
+Code is organized in units called <em>classes</em>. Each class has a single responsibility. For example, in a banking application you might have a class that represents a personal checking account, another class that represents a money market account, another that represents a business checking account, and so forth. 
+</p>
+<p>
+It also makes sense to collect these classes into a larger grouping that has a broader set of closely-related responsibilities. In Java, this level of code organization is called a <em>package</em>. The package is the unit of deployment for Java applications. In the banking example, you might have a package where all the &quot;account&quot; classes live. 
+</p>
+<p>
+Java provides several packages that support commonly-used functionality. The core package is called <span class="code">java.lang</span>. Your classes automatically have access to all the classes in the <span class="code">java.lang</span> package. Java also provides packages that support various types of functionality you might need in an application, such as <span class="code">java.util</span>, <span class="code">java.io</span>, <span class="code">java.text</span>, <span class="code">java.net</span> <span class="code">java.math</span>, and others. You can probably guess the purpose of each package by its name. 
+</p>
+<p>
+The sample code you've seen so far doesn't declare a package name. By default, such classes belong to the &quot;default package,&quot; which the JVM manages internally for you. In real life, you will not deliver any applications with code in the default package; you will always deploy your code in named packages. The first statement in a source file declares its package:
+</p>
+<div class="code box">
+<pre>
+package my.fine.package;
+
+public class MyFineClass {
+    . . .
+}
+</pre>
+</div>
+<p>
+In Java, the package structure parallels the directory structure for source and class files. So, the class <span class="code">MyFineClass</span> in package <span class="code">my.fine.package</span> would live in this directory structure:
+</p>
+<div class="code box">
+<pre>
+source-directory/
+  |
+  +-- my/
+        |
+        +-- fine/
+              |
+              +-- package/
+                    |
+                    +-- MyFineClass.java
+classes-directory/
+  |
+  +-- my/
+        |
+        +-- fine/
+              |
+              +-- package/
+                    |
+                    +-- MyFineClass.class
+</pre>
+</div>
+<p>
+Why not explore this facet of Java a bit? 
+<ol>
+<li>Open a command line window and navigate to the <span class="code">start-here</span> directory.</li>
+<li>Create directories <span class="code">unit2/test</span>.</li>
+<li>Copy <span class="code">CompileMe.java</span> to <span class="code">unit2/test/CompileMe2</span>.</li>
+<li>
+<p>
+Edit the file <span class="code">CompileMe2.java</span>, change the class name to <span class="code">CompileMe2</span>, and add the following line to the top of the file:
+</p>
+<div class="code box">
+package unit2.test;
+</div>
+</li>
+<li>
+Do the same for the <span class="code">RunMe.java</span> file, so that you have a <span class="code">unit2/test/RunMe2.java</span> file. Now both classes are declared to be members of package <span class="code">unit2.test</span>. (Remember to change the class name to <span class="code">RunMe2</span>, and to changae the references to <span class="code">CompileMe</span> to <span class="code">CompileMe2</span>.)
+</li>
+<li>Change to directory <span class="code">start-here/unit2/test</span>.</li>
+<li>
+<p>
+Compile the two classes:
+</p>
+<div class="code box">
+javac *.java
+</div>
+<p>
+Notice that this works &mdash; the compiler finds the source files in the current directory and writes <span class="code">.class</span> files into the same directory. Now try to execute the program:
+</p>
+<div class="code box">
+java RunMe2
+</div>
+</li>
+<li>
+<p>
+You will see output similar to the following:
+</p>
+<div class="code box">
+<pre>
+Exception in thread "main" java.lang.NoClassDefFoundError: RunMe2 (wrong name: unit2/test/RunMe2)
+    at java.lang.ClassLoader.defineClass1(Native Method)
+    at java.lang.ClassLoader.defineClass(ClassLoader.java:634)
+    at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+    at java.net.URLClassLoader.defineClass(URLClassLoader.java:277)
+    at java.net.URLClassLoader.access$000(URLClassLoader.java:73)
+    at java.net.URLClassLoader$1.run(URLClassLoader.java:212)
+    at java.security.AccessController.doPrivileged(Native Method)
+    at java.net.URLClassLoader.findClass(URLClassLoader.java:205)
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:321)
+    at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:294)
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:266)
+Could not find the main class: RunMe2. Program will exit.
+</pre>
+</div>
+<p>
+By the way, that mess is called a <em>stack trace</em>. It lists the methods that were invoked leading up to an error. You will become very familiar with stack traces before you've worked with Java for very long.
+</p>
+<p>
+Okay, what's the problem? The compiler had no difficulty locating the source files in the current directory. Why can't the runtime locate the corresponding class files in the very same directory? It turns out that the compiler and the runtime don't look for files in exactly the same way. The runtime searches a path known as the <em>classpath</em> to find class files. It isn't the same as the system PATH. 
+</p>
+<p>
+By default, the runtime can find class files relative to the current working directory. Otherwise, you have to specify a classpath for it to search.
+</p>
+<p>
+But wait...<span class="code">start-here/unit2/test</span> <em>is</em> the current working directory. We can prove it by listing the contents of the directory. <em>Voila!</em> here are the class files. So, what gives?
+</p>
+<p>
+By default, the current working directory is on the classpath. But remember that the package name corresponds with the directory structure. You have to invoke the JVM from the <em>top level</em> directory so it can trace through the directory hierarchy based on the segments of the package name. 
+</p>
+<p>
+Change to directory <span class="code">start-here</span> and try running the program again. You have to pass the fully-qualified name to the runtime, including the package name, like this:
+</p>
+<div class="code box">
+java unit2.test.RunMe2
+</div>
+<p>
+This time, the program outputs its class name as:
+</p>
+<div class="code box">
+unit2.test.CompileMe2
+</div>
+</li>
+</ol>
+<p>
+The runtime will look for an environment variable named <span class="code">CLASSPATH</span>, or it will accept a command-line argument of <span class="code">-cp</span> where you can list all the directories (and jar files &mdash; more on that later) to be included in the classpath. This can be extremely tedious when working on the command line, so henceforth we will use an IDE (integrated development environment) that handles the classpath setting for us, as a convenience. An IDE is not a crutch or an excuse not to learn how things happen under the covers, but only a convenience to save time and avoid careless mistakes.
+</p>
+
+</body>
+</html>

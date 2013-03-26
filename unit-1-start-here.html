@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 1: Start Here</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="index.html" title="previous">&lt;= Top</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-1-debrief.html" title="next">Unit 1 Debrief =&gt;</a>
+<h1>Unit 1: Start Here</h1>
+<p>
+First steps to get familiar with Java compilation and command-line tools.
+</p>
+<ol>
+<li>Open a command-line window.</li>
+<li>Change to the <span class="code">start-here</span> directory.</li>
+<li>
+<p>
+See which version of Java is installed on your system:
+</p>
+<div class="code box">
+java -version
+</div>
+<p>
+This displays the version of Java that is found on your system's PATH.
+</p>
+</li>
+<li>
+<p>
+Start the Java runtime:
+</p>
+<div class="code box">
+java
+</div>
+<p>
+This starts the Java runtime. When you don't provide any command-line arguments, it displays the available command-line arguments by default.
+</p>
+</li>
+<li>
+<p>
+List the contents of the directory. If you are on a *nix system, enter
+</p>
+<div class="code box">
+ls -l
+</div>
+<p>
+If you are on a Windows system, enter	
+</p>
+<div class="code box">
+dir
+</div>
+<p>
+Notice that the directory contains a Java source file named <span class="code">CompileMe.java</span>. The names of Java source files always end with <span class="code">.java</span>.
+</p>
+<p>
+List the contents of the source file. If you are on a *nix system, enter
+</p>
+<div class="code box">
+cat CompileMe.java
+</div>
+<p>
+If you are on a Windows system, enter	
+</p>
+<div class="code box">
+type CompileMe.java
+</div>
+<p>
+You should see something like this:
+</p>
+<div class="code box">
+<pre>
+public class CompileMe {
+    public String thisClassName() {
+        return this.getClass().getName();
+    }
+}
+</pre>
+</div>
+<p>
+From this, you can surmise that a Java source file contains a <em>class</em> declaration, and the contents of the class are enclosed within a pair of curly braces. This class contains a single method. You can surmise from the example that the contents of a <em>method</em> are enclosed within a pair of curly braces. 
+</p>
+<p>
+You might guess that Java uses curly braces to delimit blocks of code. This would be a good guess.
+</p>
+<p>
+Regarding naming conventions, the example suggests that a Java class name begins with an upper-case letter and follows camel-case capitalization. The source file name is exactly the same as the class name it contains, except for the suffix <span class="code">.java</span>.
+</p>
+<p>
+There are a few other things in the source file that you might not understand. Don't worry, everything will be explained in due time.
+</p>
+</li>
+<li>
+<p>
+Now compile the source file:
+</p>
+<div class="code box">
+javac CompileMe.java
+</div>
+<p>
+This command runs the Java compiler. You pass the names of one or more Java source files as command-line arguments. You might have noticed that the compiler did not write any output to the console. This is the defined behavior of the Java compiler when no compilation errors occur. 
+</p>
+<p>
+List the contents of the directory again, and you will see a new file there named <span class="code">CompileMe.class</span>. From this, you might surmise that the names of Java <em>object</em> files end with <span class="code">.class</span>.  
+</p>
+<p>
+Java <span class="code">class</span> files do not contain native object code for the hardware platform. They contain <span class="code">byte codes</span>. Byte codes are object code for the <span class="code">Java Virtual Machine</span> (JVM). A JVM is a software implementation of a machine architecture, much like the hardware architecture of an Intel chipset or the IBM z/Architecture Central Processor. The same &quot;virtual&quot; architecture is implemented in native code for each of the platforms that supports Java. That way, you can write code once and deploy it on any system that has a JVM.
+</p>
+</li>
+<li>
+<p>
+OK, so what happens when the compiler doesn't like what it finds in a source file? Coincidentally, a source file with compile-time errors is present in the <span class="code">start-here</span> directory. Try to compile it:
+</p>
+<div class="code box">
+javac BadCode.java
+</div>
+<p>
+This time, there were compilation errors, and the Java compiler wrote error messages to the console.
+</p>
+</li>
+<li>
+<p>
+Why not run the <span class="code">CompileMe</span> program you compiled a couple of minutes ago? Try this:
+</p>
+<div class="code box">
+java CompileMe
+</div>
+<p>
+This command starts the JVM and passes the name of the class you want to run. The suffix <span class="code">.class</span> is implied. (A funny thing about Java is that the compiler requires you to include the suffix <span class="code">.java</span> for the source files, but the Java runtime doesn't want to see the <span class="code">.class</span> suffix for class files. Go figure.)
+</p>
+<p>
+So, you should have seen output similar to this:
+</p>
+<div class="code box">
+Exception in thread "main" java.lang.NoSuchMethodError: main
+</div>
+<p>
+Lovely, isn't it? You might surmise from this that the Java runtime expects to find a method named <span class="code">main</span> in the class file you passed in. If you recall, there is no such method in the class <span class="code">CompileMe</span>.
+ </p>
+</li>
+<li>
+<p>
+Let's create a class that has a <span class="code">main</span> method in it. Open your favorite text editor (or whatever text editor is available) and create a file named <span class="code">RunMe.java</span> in the <span class="code">start-here</span> directory. Give the file the following contents:
+</p>
+<div class="code box">
+<pre>
+public class RunMe {
+    public static void main(String[] args) {
+        CompileMe app = new CompileMe();
+        System.out.println(app.thisClassName());
+    }
+}
+</pre>
+</div>
+<p>
+Now compile <span class="code">RunMe</span>. Go on. You know how.
+</p>
+<p>
+When you execute <span class="code">RunMe</span> (yeah, you know how to do that, too), expect to see console output like this:
+</p>
+<div class="code box">
+CompileMe
+</div>
+<p>
+OK, so you have a working Java program. Congratulations. Looking back at the source code of <span class="code">CompileMe</span>, you see that it contains a method named <span class="code">thisClassName</span>. That methods does some cryptic stuff that hasn't been explained yet to get its own class name. The <span class="code">RunMe</span> class then does some other cryptic stuff that results in the string <span class="code">CompileMe</span> being displayed on the console. 
+</p>
+<p>
+Whew.
+</p>
+<p>
+So, what's all that cryptic stuff? Next unit. Read on.
+</p>
+</li>
+</ol>
+
+</body>
+</html>

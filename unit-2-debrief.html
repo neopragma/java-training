@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 2: Debrief</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-2-classpath-and-packages.html" title="previous">&lt;= Unit 2: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-3-fizz-buzz.html" title="next">Unit 3: Fizz Buzz =&gt;</a>
+<h1>Unit 2: Debrief</h1>
+<p>
+What did we learn in Unit 2? We learned:
+</p>
+<ul>
+<li>Java code is packaged into...well, into <em>packages</em>.</li>
+<li>By convention, package names are all lower-case, with segments separated by dots.</li>
+<li>The segments in package names correspond directly with directories in a directory hierarchy.</li>
+<li>The Java runtime depends on the package-related directory structure to locate class files.</li>
+<li>The Java runtime searches directories and jar files specified in the <span class="code">CLASSPATH</span> environment variable or in a list provided with command-line argument <span class="code">-cp</span>.</li>
+<li>If you don't declare a package for a class, Java places the class in the default package.</li>
+<li>It is a good practice to define all your classes in specific packages, and not to leave code in the default package.</li>
+<li>Java provides several useful packages you can use in your programs.</li>
+<li>The <span class="code">java.lang</span> package contains basic Java functionality, and is always visible to your code.</li>
+</ul>
+<p>
+There are two errors in particular that plague Java programmers. One of them is that the classpath is not set correctly. Because Java performs late binding, the compiler can't warn you about this; you only find out about it when the JVM throws exceptions at run time when it can't find a class you've told it to load. Fair warning: This will happen to you. Welcome to the club. The second common error is a topic for another unit.
+</p>
+
+</body>
+</html>

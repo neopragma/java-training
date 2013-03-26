@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 4: Debrief</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-4-exploring-strings.html" title="previous">&lt;= Unit 4: Exploring Strings</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-5-arrays.html" title="next">Unit 5: Arrays =&gt;</a>
+<h1>Unit 4: Debrief</h1>
+<p>
+What did we learn in Unit 4? We learned:
+</p>
+<ul>
+<li>The difference between an empty string and a null reference.</li>
+<li>How to tell a JUnit test case to expect an exception.</li>
+<li>How to handle exceptions in Java.</li>
+<li>How to find the length of a String instance.</li>
+<li>How to extract a single character from a String instance.</li>
+<li>How to extract substrings from a String instance.</li>
+<li>Three ways to concatenate String values.</li>
+<li>How to convert a String value to upper case or lower case.</li>
+<li>How to use the <span class="code">import</span> statement to access additional Java packages.</li>
+<li>How to compare two String instances (in a basic way).</li>
+</ul>
+<h2>References</h2>
+<p>
+OK, so what's all this about &quot;references,&quot; and what's a &quot;null reference?&quot; When I declare a String variable, like this...
+</p>
+<div class="code box">
+private String lastName;
+</div>
+<p>
+...why isn't it automatically a string value of zero length?
+</p>
+<p>
+Here's a bit more information about what's going on in the JVM with respect to objects in memory.
+</p>
+<p align="center">
+<a href="images/references-in-jvm.png" target="_blank" title="click to enlarge"><img src="images/references-in-jvm2.png" border="0" align="center"/></a>
+</p>
+<p>
+When you instantiate an object, the JVM loads the code from the class file into memory and creates a data structure known as a <em>reference</em> that contains the memory address of the instance as well as the name of the class the instance represents.
+</p>
+<p>
+Merely <em>declaring</em> a variable of a certain type does not actually <em>instantiate</em> an object. There is no reference because there is no object for the reference to point to. So, the memory address of the non-existent instance is zero, or <em>null</em>.
+</p>
+<p>
+Memory addresses in references are also known as <em>pointers</em>. A null pointer is a memory address with a value of zero. This is what Java is trying to tell you when it throws a <span class="code">NullPointerException</span> &mdash; your code has attempted to access an instance in memory by following a pointer whose value is zero, or null. A pointer with a value of zero doesn't actually point to anything, so the JVM doesn't know what else to do but give up and throw an exception.
+</p>
+<p>
+Earlier we mentioned there were two errors in particular that plague Java programmers. One of them is that the classpath isn't set correctly. The <span class="code">NullPointerException</span> is the other. It is a <em>runtime exception</em>, so it isn't checked by the compiler. Java doesn't know it is going to happen until it happens. This is, apparently, very confusing for many novice Java programmers. It also leaps out of the darkness to bite experienced Java programmers with embarrassing frequency.
+</p>
+<h2>Garbage collection</h2>
+<p>
+Let's say you had some code like this:
+</p>
+<p>
+<div class="code box">
+<pre>
+public class Whatever {
+    private WonderfulThing myThing;
+    . . .
+    public int createThing(String name, int height, float weight, String colorName) {
+        Color color = new Color(colorName);
+        return new WonderfulThing(name, height, weight, color);
+    }
+}
+</pre>
+</div>
+</p>
+<p>
+In method <span class="code">createThing</span>, you instantiate an instance of class <span class="code">Color</span> which you pass into the constructor of <span class="code">WonderfulThing</span>. Your application does things with the instances of <span class="code">WonderfulThing</span> and <span class="code">Color</span>. The JVM also creates objects for the name, height, and weight attributes you declared. 
+</p>
+<p>
+Eventually the <span class="code">WonderfulThing</span> goes out of scope; there is no longer an active reference to it in the JVM. What happens to the memory occupied by the five instances that were created? The JVM cleans them up with an internal operation known as <em>garbage collection</em>. You don't directly control garbage collection, although you can &quot;suggest&quot; that the JVM do it as soon as it gets a chance, if your application is sophisticated enough to need to do that.
+</p>
+<p>
+Garbage collection frees the memory that was allocated to orphaned instances in the JVM, and reorganizes memory to eliminate fragmentation. If you monitor the performance of a long-running Java application such as an application server or web server, you will notice times when performance degrades briefly. This happens when the garbage collector is active.
+</p>
+<h2>String interning</h2>
+<p>
+We mentioned that the JVM handles String instances in a special way. Because string data is so very common, and because many String instances may have the same data value, the JVM uses a technique known as <em>internalization</em> or <em>interning</em> to manage String values.
+</p>
+<p>
+The first thing to understand about this is that a String instance is <em>immutable</em>. That means you can't change the value of a String instance after it has been instantiated. When you write code like this...
+</p>
+<div class="code box">
+<pre>
+    private String soundEffect = "sproingg";
+    . . .
+    soundEffect = "kerblooie";
+</pre>
+</div>
+<p>
+...the JVM creates a new String instance with the value, &quot;kerblooie.&quot; It does not replace the value &quot;sproingg&quot; in the original instance.
+</p>
+<p>
+Because String instances are immutable, and because of the way references work, it's easy for a JVM to implement string interning. An interned String is simply a shared instance; multiple references can point to the same instance. In this way, the JVM maintains exactly one copy of any given string value. 
+</p>
+<p>
+Here's an example in which two classes have created String instances with different values.
+</p>
+<p align="center">
+<a href="images/string-intern-1.png" title="click to enlarge"><img src="images/string-intern-1-2.png" border="0" align="center"/></a>
+</p>
+<p>
+When the application assigns a new value to String s1, the JVM sees that the new value of s1 is the same as the value of an existing String instance. Rather than incurring the overhead of instantiating a new String, the JVM sets the pointer in the reference for s1 to point to the instance that already contains the value, &quot;beta.&quot;
+</p>
+<p align="center">
+<a href="images/string-intern-2.png" title="click to enlarge"><img src="images/string-intern-2-2.png" border="0" align="center"/></a></p>
+<h2>Primitive data types and wrapper classes</h2>
+<p>
+We have mentioned that &quot;everything is an object&quot; in the JVM. Yet, you have probably already noticed that there are some data types that are declared just like primitive types in C-like languages. They are:
+<ul>
+<li>byte</li>
+<li>short</li>
+<li>int</li>
+<li>long</li>
+<li>float</li>
+<li>double</li>
+<li>boolean</li>
+<li>char</li>
+</ul>
+</p>
+<p>
+These types can be coded as if they were primitives, to make your source code a little easier to read and understand. Under the covers, the JVM creates instances for these values. Because these types are so frequently used in programs, the JVM handles them in a similar way to interned Strings. That is, under the covers there will be exactly one copy of a &quot;double&quot; instance that has a given value, even if many classes in memory currently have variables of type double with the same value.
+</p>
+<p>
+For each pseudo-primitive data type there is a corresponding <em>wrapper class</em>. The wrapper classes have useful methods for operating on data of the given type, and they are serializable so they can be passed across JVMs using RMI or some other transport mechanism that can marshal objects for transfer over the wire. You can mix and match references to the primitive or wrapper forms of these types in most cases, thanks to a Java feature called <em>auto-boxing</em>. That means the JVM will automatically &quot;box&quot; a pseudo-primitive value in its wrapper class when appropriate. The JVM does a less than perfect job of recognizing when this is possible, so it is usually best not to count on it.
+</p>
+<p>
+Here are some examples of using wrapper classes:
+</p>
+<div class="code box">
+<pre>
+private int tally = 0;
+private Integer wrappedTally = new Integer(0);
+
+private boolean result = false;
+private Boolean wrappedResult = new Boolean(Boolean.FALSE);
+</pre>
+</div>
+<p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr>
+<th>Primitive type</th><th>Default value</th><th>Wrapper class</th>
+</tr>
+<tr>
+<td>byte</td><td>0</td><td>Byte</td>
+</tr>
+<tr>
+<td>short</td><td>0</td><td>Short</td>
+</tr>
+<tr>
+<td>int</td><td>0</td><td>Integer</td>
+</tr>
+<tr>
+<td>long</td><td>0L</td><td>Long</td>
+</tr>
+<tr>
+<td>float</td><td>0.0f</td><td>Float</td>
+</tr>
+<tr>
+<td>double</td><td>0.0d</td><td>Double</td>
+</tr>
+<tr>
+<td>boolean</td><td>false</td><td>Boolean</td>
+</tr>
+<tr>
+<td>char</td><td>'\u0000'</td><td>Character</td>
+</tr>
+<table>
+</p>
+<p>
+The bit with the \u is a Unicode escape sequence. The value '\u0000' represents Unicode code point zero.
+</p>
+<p>
+One difference between these primitive types and standard classes is that you need not call a constructor to instantiate them. When you declare them as fields but don't assign a value, the JVM automatically gives them a default value. (When you declare them as local variables within a method, this doesn't happen; more on this later.)
+</p>
+<div class="code box">
+<pre>
+private int tally1 = 0;
+private int tally2;         // numerical primitives default to zero
+
+private boolean result = false;
+private boolean;            // boolean primitives default to false
+</pre>
+</div>
+
+</body>
+</html>

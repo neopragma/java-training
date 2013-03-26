@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 8: Internationalization</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-7-debrief.html" title="previous">&lt;= Unit 7: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-8-debrief.html" title="next">Unit 8: Debrief =&gt;</a>
+<h1>Unit 8: Internationalization</h1>
+<p>
+<em>Internationalization</em>, sometimes abbreviated to <em>i18n</em>, means to enable an application to support different languages. Internationalization has to do with the way the application is coded. 
+</p>
+<p>
+The other half of the equation is to supply the values of messages, labels, and so forth in each supported language. That work is called <em>localization</em>. 
+</p>
+<p>
+Internationalization is done by programmers. Localization is usually done by language specialists.
+</p>
+<p>
+In Java, internationalization is supported by defining data values in <span class="code">.properties</span> files or in classes that extend the abstract class <span class="code">ResourceBundle</span>, and then by setting a <em>locale</em> via an instance of <span class="code">Locale</span>. 
+</p>
+<h2>Locale</h2>
+<p>
+Internationalization in Java is based on the <em>locale</em> currently in effect. An application can change the locale at any time. When an application doesn't specify a locale explicitly, the JVM uses the default locale that was specified when Java was installed on the system. 
+</p>
+<p>
+The locale is specified by instantiating an object of type <span class="code">java.util.Locale</span>. Up to and including Java 1.6, the <span class="code">Locale</span> class contains three logical values: <em>language</em>, <em>country</em>, and <em>variant</em>. Starting with Java 1.7, the <span class="code">Locale</span> class can support a more fine-grained definition of a locale, based on various international standard codes. Most applications do not require this level of control, and use the basic three values to define locales. 
+</p>
+<p>
+For purposes of this class, we will use <span class="code">Locale</span> objects limited to just those three values. This version is documented at  <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Locale.html" target="_blank">http://docs.oracle.com/javase/6/docs/api/java/util/Locale.html</a>. If you are interested in learning more about the Java 1.7 version of <span class="code">Locale</span>, please consult <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Locale.html" target="_blank">http://docs.oracle.com/javase/7/docs/api/java/util/Locale.html</a>.
+</p>
+<p>
+For this version of <span class="code">Locale</span>, the <em>language</em> is represented by a two-character, lower-case, ISO-639 code. See <a href="http://www.loc.gov/standards/iso639-2/php/English_list.php" target="_blank">http://www.loc.gov/standards/iso639-2/php/English_list.php</a> for details.
+</p>
+<p>
+The <em>country</em> is represented by a two-character, upper-case, ISO-3166 country code. See <a href="http://www.iso.org/iso/prods-services/iso3166ma/02iso-3166-code-lists/country_names_and_code_elements" target="_blank">http://www.iso.org/iso/prods-services/iso3166ma/02iso-3166-code-lists/country_names_and_code_elements</a> for details. 
+</p>
+<p>
+Although the official documentation suggests the <em>variant</em> has something to do with the underlying system platform, in fact there is no predefined usage for it. Your application can use the <em>variant</em> for any purpose. The <em>variant</em> is often used to denote a dialect or regional version of a language. For example, you could specify Cockney by using 
+</p>
+<p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr>
+<th>language</th><th>country</th><th>variant</th><th>string representation</th>
+</tr>
+<tr>
+<td>en</td><td>GB</td><td>cockney</td><td>en_GB_cockney</td>
+</tr>
+</table>
+</p>
+<p>
+Only the <em>language</em> is required. You can let the other values default unless your application requires them.
+</p>
+<p>
+To instantiate a <span class="code">Locale</span> object, you can use any of the following constructors:
+<ul>
+<li><span class="code">Locale(language)</span></li>
+<li><span class="code">Locale(language, country)</span></li>
+<li><span class="code">Locale(language, country, variant)</span></li>
+</ul>
+</p>
+<p>
+Here are a few examples:
+</p>
+<p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr>
+<th>language</th><th>country</th><th>variant</th><th>constructor call</th><th>string representation</th><th>description</th>
+</tr>
+<tr>
+<td>de</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="code">new Locale("de");</td><td>de</td><td>German</td>
+</tr>
+<tr>
+<td>fr</td><td>CA</td><td>&nbsp;</td><td><span class="code">new Locale("fr", "CA");</td><td>fr_CA</td><td>Canadian French</td>
+</tr>
+<tr>
+<td>en</td><td>US</td><td>&nbsp;</td><td><span class="code">new Locale("en", "US");</td><td>en_US</td><td>American English</td>
+</tr>
+<tr>
+<td>en</td><td>US</td><td>walmart</td><td><span class="code">new Locale("en", "US", "walmart");</td><td>en_US</td><td>American English with Walmart-branded UI</td>
+</tr>
+<tr>
+<td>en</td><td>US</td><td>target</td><td><span class="code">new Locale("en", "US", "target");</td><td>en_US</td><td>American English with Target-branded UI</td>
+</tr>
+<tr>
+<td>zh</td><td>CN</td><td>WIN</td><td><span class="code">new Locale("zh", "CN", "WIN");</td><td>zh_CN_WIN</td><td>Chinese with Windows collation</td>
+</tr>
+<tr>
+<td>zh</td><td>CN</td><td>POSIX</td><td><span class="code">new Locale("zh", "CN", "POSIX");</td><td>zh_CN_POSIX</td><td>Chinese with POSIX collation</td>
+</tr>
+</table>
+</p>
+<h2>Resource bundle</h2>
+<p>
+A <span class="code">Locale</span> instance by itself doesn't cause the application to display locale-specific text, colors, images, layouts, or anything else. It only tells the application which locale to use. The application has to obtain the locale-specific information somehow.
+</p>
+<p>
+Java supports this look-up via <em>resource bundles</em> &mdash; bundles of locale-specific resources that can be substituted for placeholders in log messages, reports, screens, and so forth. A resource bundle is encapsulated in an instance of the <span class="code">java.util.ResourceBundle</span> class. <span class="code">ResourceBundle</span> is an <em>abstract class</em>, which means that it cannot be instantiated directly. 
+</p>
+<p>
+	An abstract class usually contains an incomplete implementation of an interface. You have to create a concrete subclass of the abstract class in which you fill in the missing functionality. Java provides two concrete subclasses, as shown in the figure below:
+</p>
+<p align="center">
+<a href="images/resourcebundle.png" target="_blank" title="click to enlarge"><img src="images/resourcebundle2.png" border="0" align="center"/></a>
+</p>
+<p>
+A <em>property resource bundle</em> is backed by a <span class="code">.properties</span> file. The file contains key/value pairs in the standard format for <span class="code">.properties</span> files. A <em>list resource bundle</em> encapsulates the key/value pairs in a compiled class. 
+</p>
+<p>
+The advantage of a property resource bundle is that you can externalize data values and change them without having to recompile code. However, it can only contain string values. The advantage of a list resource bundle is that you can include any sort of Java object as a localized value. It is also useful in cases when you do not want people to change the values arbitrarily. 
+</p>
+<p>
+In practice, there is rarely a need to define non-string values. Even if you want to localize color schemes or graphics, you will usually handle this by storing the file names that contain the binary data rather than coding it directly in a <span class="code">ListResourceBundle</span> instance. In this class we will only use <span class="code">PropertyResourceBundle</span>.
+</p>
+<h2>How Java locates resource bundles</h2>
+<p>
+Remember the string representation of a <span class="code">Locale</span> &mdash; values like <span class="code">en_US</span> and <span class="code">zh_CN_POSIX</span>? This is the key to organizing resource bundles so that Java will locate them in the correct order. The names of the resource bundles &mdash; the <span class="code">.properties</span> file or the <span class="code">ListResourceBundle</span> subclass name &mdash; end with locale strings. Based on the <span class="code">Locale</span> you specify in your program, Java searches for resource bundles that match the locale string.
+</p>
+<p>
+Java uses a &quot;cascade&quot; algorithm to locate individual resources in the bundles. You query a resource by its name, which is the key in a key/value pair. The <span class="code">ResourceBundle</span> class returns the value that matches the key, searching through the available resource bundles to find the first match with the specified <span class="code">Locale</span>. 
+</p>
+<p>
+Let's say you have the following properties defined in three different <span class="code">.properties</span> files:
+</p>
+<p>
+Filename: <span class="code">messages_en_US_polite.properties</span>
+</p>
+<p>
+<div class="code box">
+<pre>
+no.colour.support = Sorry, the image format doesn't support the color palette you specified.
+</pre>
+</div>
+</p>
+<p>
+Filename: <span class="code">messages_en_US.properties</span>
+</p>
+<p>
+<div class="code box">
+<pre>
+no.colour.support = Color palette incompatible with image format.
+</pre>
+</div>
+</p>
+<p>
+Filename: <span class="code">messages_en.properties</span>
+</p>
+<p>
+<div class="code box">
+<pre>
+no.colour.support = Colour palette incompatible with image format.
+file.not.found = File not found.
+</pre>
+</div>
+</p>
+<p>
+If you query the property named &quot;no.colour.support&quot; for locale <span class="code">en_US_polite</span>, Java will find it in file <span class="code">messages_en_US_polite.properties</span> and return the value &quot;Sorry, the image format doesn't support the color palette you specified.&quot; 
+</p>
+<p>
+If you query the property named &quot;file.not.found&quot; for locale <span class="code">en_US_polite</span>, Java will not find it in file <span class="code">messages_en_US_polite.properties</span>, so it will chop off the last part of the locale string to form another candidate resource bundle name, and look in file <span class="code">messages_en_US.properties</span>. There is no definition in that file, so Java chops off the next part of the locale string and looks for a file named <span class="code">messages_en.properties</span>. It finds the key there and returns the value &quot;File not found.&quot; 
+</p>
+<p>
+Now you have enough background information to use the Java documentation to figure out how to implement the following User Story.
+</p>
+<div class="code box">
+<pre>
+  Feature:
+    As a user, I want to see error messages in my native language 
+    so that I can understand how to deal with problems in using the system.
+
+  Scenario: Display messages in English
+    Given the printer is not ready
+    When I select "print"
+    Then I see the message "Printer is not ready"
+
+  Scenario: Display messages in Spanish
+    Given the printer is not ready
+    When I select "print"
+    Then I see the message "La impresora no est&aacute; lista"
+</pre>
+</div>
+</body>
+</html>

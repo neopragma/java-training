@@ -1,0 +1,408 @@
+package com.sample.commandlineapp;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.io.StringReader;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.xml.sax.InputSource;
+
+public class XmlToHtmlTest {
+	
+	private XmlToHtml converter;
+	private StringBuilder document;
+	private StringBuilder expectedHtml;
+	
+	@Before
+	public void before_each_test_case() {
+		converter = new XmlToHtml();
+		document = new StringBuilder();
+		expectedHtml = new StringBuilder();
+	}
+	
+	@Test
+	public void it_processes_the_bookinfo_section() throws Exception {
+		expectedHtml.append("<div class=\"book title\">The Title of the Book</div>");
+		expectedHtml.append("<div class=\"sub title\">The Subtitle of the Book</div>");
+		expectedHtml.append("<div class=\"author\">Author-Firstname Author-Surname</div>");		
+		document.append("<book>");
+		document.append("<bookinfo>");
+		document.append("<title>The Title of the Book</title>");
+		document.append("<subtitle>The Subtitle of the Book</subtitle>");
+		document.append("<author><surname>Author-Surname</surname><firstname>Author-Firstname</firstname></author>");
+		document.append("</bookinfo>");
+		document.append("</book>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_processes_the_chapter_heading() throws Exception {
+		expectedHtml.append("<div class=\"chapter title\">");
+		expectedHtml.append("The Title of the Chapter");
+		expectedHtml.append("</div>");		
+		document.append("<book>");
+		document.append("<bookinfo>");
+		document.append("</bookinfo>");
+		document.append("<chapter id=\"_123\">");
+	    document.append("<title>The Title of the Chapter</title>");
+	    document.append("<para>Some content.</para>");
+	    document.append("</chapter>");
+		document.append("</book>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_uses_the_chapter_title_as_the_html_document_title() throws Exception {
+		expectedHtml.append("<head>\n<title>The Title of the Chapter</title>");
+
+		document.append("<book>");
+		document.append("<bookinfo>");
+		document.append("</bookinfo>");
+		document.append("<chapter id=\"_123\">");
+	    document.append("<title>The Title of the Chapter</title>");
+	    document.append("<para>Some content.</para>");
+	    document.append("</chapter>");
+	    document.append("</book>");
+		callParserAndAssertExpectedHtml();		
+	}
+	
+	@Test
+	public void it_converts_a_sect1_to_a_div_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<div class=\"sect1 title\">");
+		expectedHtml.append("Section heading");
+		expectedHtml.append("</div>");
+		document.append("<sect1><title>Section heading</title></sect1>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_sect2_to_a_div_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<div class=\"sect2 title\">");
+		expectedHtml.append("Section heading");
+		expectedHtml.append("</div>");
+		document.append("<sect2><title>Section heading</title></sect2>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_simplesect_to_a_div_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<div class=\"simplesect title\">");
+		expectedHtml.append("Section heading");
+		expectedHtml.append("</div>");
+		document.append("<simplesect><title>Section heading</title></simplesect>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_sidebar_to_a_div_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<div class=\"sidebar\">");
+		expectedHtml.append("<div class=\"simplesect\">");
+		expectedHtml.append("Sidebar Title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Sidebar content.</p>");
+		expectedHtml.append("</div>");
+
+		document.append("<sidebar><title>Sidebar Title</title>");
+		document.append("<para>Sidebar content.</para>");
+		document.append("</sidebar>");
+
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_blockquote_to_a_div_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<div class=\"callout\">");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("</div>");
+		
+		document.append("<blockquote>");
+		document.append("<para>Some content.</para>");
+		document.append("</blockquote>");
+
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_quote_to_a_div_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<div class=\"callout\">");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("</div>");
+		
+		document.append("<quote>");
+		document.append("<para>Some content.</para>");
+		document.append("</quote>");
+
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_handles_a_mixture_of_sections_properly() throws Exception {
+		expectedHtml.append("<div class=\"chapter title\">");
+		expectedHtml.append("The Title of the Chapter");
+		expectedHtml.append("</div>");	
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sect1 title\">");
+		expectedHtml.append("1 sect1 title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sect2 title\">");
+		expectedHtml.append("1.1 sect2 title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sect2 title\">");
+		expectedHtml.append("1.2 sect2 title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"simplesect title\">");
+		expectedHtml.append("1.2.1 simplesect title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sect1 title\">");
+		expectedHtml.append("2 sect1 title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sect2 title\">");
+		expectedHtml.append("2.1 sect2 title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sidebar\">");
+		expectedHtml.append("<div class=\"simplesect\">");
+		expectedHtml.append("Sidebar Title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Sidebar content.</p>");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"sect2 title\">");
+		expectedHtml.append("2.2 sect2 title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<div class=\"simplesect title\">");
+		expectedHtml.append("2.2.1 simplesect title");
+		expectedHtml.append("</div>");
+		expectedHtml.append("<p>Some content.</p>");
+		
+		document.append("<chapter id=\"_123\">");
+	    document.append("<title>The Title of the Chapter</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("<sect1><title>1 sect1 title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("<sect2><title>1.1 sect2 title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("</sect2>");
+		document.append("<sect2><title>1.2 sect2 title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("<simplesect><title>1.2.1 simplesect title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("</simplesect>");
+		document.append("</sect2>");
+		document.append("</sect1>");
+		document.append("<sect1><title>2 sect1 title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("<sect2><title>2.1 sect2 title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("<sidebar><title>Sidebar Title</title>");
+	    document.append("<para>Sidebar content.</para>");
+		document.append("</sidebar>");
+	    document.append("<para>Some content.</para>");
+		document.append("</sect2>");
+		document.append("<sect2><title>2.2 sect2 title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("<simplesect><title>2.2.1 simplesect title</title>");
+	    document.append("<para>Some content.</para>");
+		document.append("</simplesect>");
+		document.append("</sect2>");
+		document.append("</sect1>");
+	    document.append("</chapter>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_simple_paragraph() throws Exception {
+		expectedHtml.append("<p>A simple paragraph.</p>");
+		document.append("<para>A simple paragraph.</para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_paragraph_with_attributes() throws Exception {
+		expectedHtml.append("<p id=\"the_id\" class=\"css_class\">A paragraph with attributes.</p>");
+		document.append("<para id=\"the_id\" class=\"css_class\">A paragraph with attributes.</para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_paragraph_that_contains_an_italic_emphasis_tag() throws Exception {
+		expectedHtml.append("<p>Paragraph with <em>italic</em> text.</p>");
+		document.append("<para>Paragraph with <emphasis role=\"italic\">italic</emphasis> text.</para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_paragraph_that_contains_a_bold_emphasis_tag() throws Exception {
+		expectedHtml.append("<p>Paragraph with <strong>bold</strong> text.</p>");
+		document.append("<para>Paragraph with <emphasis role=\"bold\">bold</emphasis> text.</para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_paragraph_that_contains_bold_within_italic_emphasis_tags() throws Exception {
+		expectedHtml.append("<p>Paragraph with <em><strong>bold-italic</strong></em> text.</p>");
+		document.append("<para>Paragraph with <emphasis role=\"italic\"><emphasis role=\"bold\">bold-italic</emphasis></emphasis> text.</para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_a_paragraph_that_contains_italic_within_bold_emphasis_tags() throws Exception {
+		expectedHtml.append("<p>Paragraph with <strong><em>italic-bold</em></strong> text.</p>");
+		document.append("<para>Paragraph with <emphasis role=\"bold\"><emphasis role=\"italic\">italic-bold</emphasis></emphasis> text.</para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_itemizedlist_to_ul() throws Exception {
+		expectedHtml.append("<ul><li><p>Item One</p></li><li><p>Item Two</p></li></ul>");		
+		document.append("<itemizedlist>");
+		document.append("<listitem><para>Item One</para></listitem>");
+		document.append("<listitem><para>Item Two</para></listitem>");
+		document.append("</itemizedlist>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_orderedlist_to_ol() throws Exception {
+		expectedHtml.append("<ol><li><p>Item One</p></li><li><p>Item Two</p></li></ol>");		
+		document.append("<orderedlist>");
+		document.append("<listitem><para>Item One</para></listitem>");
+		document.append("<listitem><para>Item Two</para></listitem>");
+		document.append("</orderedlist>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_informalequation_mathphrase_to_p_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<p class=\"formula\">L = λW</p>");		
+		document.append("<para><informalequation><mathphrase>L = λW</mathphrase></informalequation></para>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_xref_with_linkend_into_an_anchor_tag() throws Exception {
+		expectedHtml.append("<a href=\"#target_id\">target_id</a>");
+		document.append("<xref id=\"foo\" linkend=\"target_id\"/>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_internalnote_into_a_paragraph_with_appropriate_css_class() throws Exception {
+		expectedHtml.append("<p class=\"internalnote\">Internal note text.</p>");
+		document.append("<internalnote>Internal note text.</internalnote>");
+		callParserAndAssertExpectedHtml();
+	}
+	
+	@Test
+	public void it_converts_table_title_into_table_caption() throws Exception {
+		expectedHtml.append("<table><caption>Table description.</caption></table>");
+		document.append("<table><title>Table description.</title></table>");
+		callParserAndAssertExpectedHtml();		
+	}
+	
+	@Test
+	public void it_passes_through_thead_and_tbody_tags_unchanged() throws Exception {
+		expectedHtml.append("<table><thead></thead><tbody></tbody></table>");
+		document.append("<table><thead></thead><tbody></tbody></table>");
+		callParserAndAssertExpectedHtml();		
+	}
+	
+	@Test
+	public void it_converts_row_and_entry_within_thead_to_tr_and_th_tags() throws Exception {
+		expectedHtml.append("<table><thead><tr><th><p>Cell contents</p></th></tr></thead></table>");
+		document.append("<table><thead><row><entry><para>Cell contents</para></entry></row></thead></table>");
+		callParserAndAssertExpectedHtml();		
+	}
+	
+	@Test
+	public void it_converts_row_and_entry_within_tbody_to_tr_and_td_tags() throws Exception {
+		expectedHtml.append("<table><tbody><tr><td><p>Cell contents</p></td></tr></tbody></table>");
+		document.append("<table><tbody><row><entry><para>Cell contents</para></entry></row></tbody></table>");
+		callParserAndAssertExpectedHtml();		
+	}
+	
+	@Test
+	public void it_converts_figure_with_imageobject_to_img_tag() throws Exception {
+		expectedHtml.append("<div class=\"centered\">");
+		expectedHtml.append("<img border=\"0\" align=\"center\" src=\"foo.png\"/></div>");
+		expectedHtml.append("<div class=\"centered\">Figure Caption</div>");
+		
+		document.append("<para><figure id=\"fig_foo\">");
+		document.append("<title>Figure Caption</title>");
+		document.append("<mediaobject><imageobject>");
+		document.append("<imagedata fileref=\"foo.png\"/>");
+		document.append("</imageobject></mediaobject></figure></para>");
+
+		callParserAndAssertExpectedHtml();		
+	}
+	
+	@Test
+	public void it_does_not_copy_content_for_the_indexterm_tag() throws Exception {
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<p>More content.</p>");
+
+		document.append("<book>");
+		document.append("<bookinfo>");
+		document.append("</bookinfo>");
+		document.append("<chapter><title>Foo</title>");
+		document.append("<para>Some content.</para>");
+		document.append("<para><indexterm>x<primary>xx</primary><secondary>xxx</secondary><see>xxxx</see></indexterm>More content.</para>");
+		document.append("</chapter>");
+		document.append("</book>");
+
+		callParserAndAssertExpectedHtml();			
+	}
+	
+	@Test
+	public void it_bypasses_content_for_unsupported_tags() throws Exception {
+		expectedHtml.append("<p>Some content.</p>");
+		expectedHtml.append("<p>More content.</p>");
+		document.append("<book>");
+		document.append("<bookinfo>");
+		document.append("</bookinfo>");
+		document.append("<chapter><title>Foo</title>");
+		document.append("<para>Some content.</para>");
+		document.append("<nosuchtag><para>Bar</para></nosuchtag><para>More content.</para>");
+		document.append("</chapter>");
+		document.append("</book>");
+
+		callParserAndAssertExpectedHtml();			
+	}
+	
+	@Test
+	public void it_includes_the_expected_markup_and_css_selectors() throws Exception {
+		document.append("<book><chapter><title>Chapter Title</title><para>foo</para></chapter></book>");
+		callParser(document);
+		assertThat(converter.documentAsHtml(), startsWith("<!DOCTYPE html>\n<html>\n"));
+		assertThat(converter.documentAsHtml(), endsWith("</body>\n</html>\n"));
+	    assertThat(converter.documentAsHtml(), containsString("<head>\n<title>Chapter Title</title>"));	
+	}
+	
+	private void callParserAndAssertExpectedHtml() throws Exception {
+		callParser(document);
+	    assertThat(converter.documentAsHtml(), containsString(expectedHtml.toString()));
+	}
+	
+	private void callParser(StringBuilder document) throws Exception {
+		StringReader reader = new StringReader(wrap(document));
+		converter.parseDocument(new InputSource(reader));
+	}
+	
+	private String wrap(StringBuilder value) {
+		StringBuilder document = new StringBuilder("<book>");
+		document.append(value);
+		document.append("</book>");
+		return document.toString();
+	}
+
+}

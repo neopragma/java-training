@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 1: Debrief</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-1-start-here.html" title="previous">&lt;= Unit 1: Start Here</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-2-classpath-and-packages.html" title="next">Unit 2: Classpath and Packages =&gt;</a>
+<h1>Unit 1: Debrief</h1>
+<p>
+What did we learn in Unit 1? We learned (at least):
+</p>
+<ul>
+<li>A Java Virtual Machine (JVM) is designed much like a hardware computer, but it is software.</li>
+<li>The object code for a JVM is called <em>byte codes</em>.</li>
+<li>Java class names follow the camel case convention and start with an upper-case letter, like <span class="code">CompileMe</span> or <span class="code">QuacksLikeADuck</span>.</li>
+<li>Java source file names end with <span class="code">.java</span></li>
+<li>Java source file names are the same as the name of the class they define. File <span class="code">HitMeAgain.java</li> contains the definition of class <span class="code">HitMeAgain</span></li>.
+<li>The <span class="code">javac</span> command runs the Java compiler.</li>
+<li>You have to include the suffix <span class="code">.java</span> when you pass a source file name to the compiler: <span class="code">javac HitMeAgain.java</span>.
+<li>When a source file contains no compile-time errors, the Java compiler does not emit any output messages.</li>
+<li>The <span class="code">java</span> command starts the JVM.</li>
+<li>You must not include the suffix <span class="code">.class</span> when you pass a class file name to the JVM: <span class="code">java HitMeAgain</span>.
+<li>To execute a Java class, the JVM looks for a method named <span class="code">main</span> in the class.</li>
+<li>In Java source, blocks of code are delimited by curly braces.</li>
+<li>We learned how to instantiate a Java class by calling its default constructor.</li>
+</ul>
+
+<h2>Questions</h2>
+<p>
+You saw a thing or two in the sample code in Unit 1 that might call for a bit of explanation. For instance, some of the details of the class <span class="code">RunMe</span> might not be intuitively obvious to you at this point.
+</p>
+<div class="code box">
+<pre>
+public class RunMe {
+    public static void main(String[] args) {
+        CompileMe app = new CompileMe();
+        System.out.println(app.thisClassName());
+    }
+}
+</pre>
+</div>
+<p>
+You might wonder:
+<ul>
+<li>What is a <em>class</em>, anyway?</li>
+<li>What does <em>public</em> mean?</li>
+<li>What does <em>static</em> mean?</li>
+<li>What does <em>void</em> mean?</li>
+<li>What does <span class="code">String[] args</span> mean?</li>
+<li>From the context, you can guess <span class="code">System.out.println()</span> writes to the system console, but what are all those dots for?</li>
+<li>If the JVM calls the <span class="code">main</span> method to start the program, how does it know how to <em>stop</em> the program when it's finished?</li>
+<li>We compiled a program, but we never linked it. Why not?</li>
+<li>Why can't we just stick the <span class="code">main</span> method directly in the <span class="code">CompileMe</span> class? After all, this is a pretty small program, and two files seems like overkill.</li>
+</ul>
+</p>
+<p>
+<h2>Object orientation</h2>
+</p>
+<p>
+Java is an <em>object oriented</em> language. The basic idea of object orientation is that code and data are grouped together into units known as <em>objects</em>, and programs are constructed by having objects interact with one another. Let's look at a few of the basic ideas of object orientation and see how Java supports them. 
+</p>
+<p>
+Objects have three important characteristics:
+<ol>
+<li>Identity</li>
+<li>Attributes or properties</li>
+<li>Operations</li>
+</ol>
+</p>
+<p>
+A runtime system recognizes objects by their <em>identity</em>. Each object's identity is unique. 
+</p>
+<p>
+<em>Attributes</em> or <em>properties</em> are the data an object owns and manages.
+</p>
+<p>
+<em>Operations</em> are the executable code within an object that manages its properties. 
+</p>
+<p>
+Here is an illustration from <a href="http://www.agilemodeling.com" target="_blank">www.agilemodeling.com</a>. It is a UML Class Diagram that describes four classes in a hypothetical university enrollment application.
+</p>
+<p align="center">
+<img src="images/classDiagramInitial.jpg" align="center"/>
+</p>
+<p>
+Objects interact by sending <em>messages</em> to one another. The notion of &quot;sending a message&quot; boils down to invoking an operation on another object. If a program wanted to know if a particular student is eligible to enroll in a given seminar, it would invoke the operation &quot;Is Eligible To Enroll&quot; on the appropriate <span class="code">Student</span> object.
+</p>
+<p>
+Each object oriented language defines its own terms for these basic ideas. The Java terminology that corresponds with general object oriented terms is as follows:
+</p>
+<p>
+<table border="1" cellspacing="0" callpadding="4">
+<tr>
+<th>General term</th>
+<th>Java term</th>
+</tr>
+<tr>
+<td>object</td><td>instance</td>
+</tr>
+<tr>
+<td>identity</td><td>reference</td>
+</tr>
+<tr>
+<td>attribute or property</td><td>field</td>
+</tr>
+<tr>
+<td>operation</td><td>method</td>
+</tr>
+<tr>
+<td>message</td><td>method call</td>
+</tr>
+</table>
+</p>
+<p>
+You've seen the term <em>class</em> quite a few times already, both in the sample Java code and in the UML diagram. Why is <em>class</em> not listed in the table of object oriented terms? Because the concept of &quot;class&quot; is not strictly necessary for an object oriented system. Many object oriented languages use the idea of &quot;class&quot; as part of their implementation, and Java is one of these, but an object oriented language can be implemented without the concept of &quot;class.&quot; 
+</p>
+<p>
+Programming languages have a <em>type system</em> of some sort that controls the kind of data a variable can represent and, to some degree, the kinds of operations that can be done with the variable. In Java, the type system is based on <em>classes</em>. Here is an analogy that may be useful: A <em>class</em> is like the script for a play or the printed score of a symphony; <em>objects</em> of a given class are like specific performances of the play or the symphony. 
+</p>
+<p>
+Java is a <em>statically typed</em> language. That means you declare the type of each variable in the source code. The compiler checks to be sure a value that has a different type than that declared for a variable will not be assigned to that variable. Depending on the problem you are solving, you might choose a language that has little or no type safety, such as JavaScript or Ruby, or one that has very strong type safety, such as Haskell or Idris. Java is meant to be a general-purpose programming language, and its type system falls between the extremes of dynamic typing and strong typing by design, so it will be a practical choice for a wide range of problems. It provides some degree of type safety while allowing some flexibility for type conversion at runtime.
+</p>
+<p>
+In the UML diagram above, the classes provide templates or models for objects of each type. As a programmer, you can assume that any object of type <span class="code">Student</span> will have the properties <em>Name</em>, <em>Address</em>, <em>Phone Number</em>, etc. and the operations <em>Is Eligible To Enroll</em> and <em>Get Seminars Taken</em>. 
+</p>
+<p>
+Here is how some portions of the <span class="code">Student</span> class might be implemented in Java:
+</p>
+<div class="code box">
+<pre>
+public class Student {
+    private String name;
+    private MailingAddress address;
+    private EmailAddress email;
+    private Integer studentNumber;
+    private float averageMark;
+    private List<Seminar> seminarsTaken;
+
+    . . .
+
+    public boolean isEligibleToEnroll(Seminar seminar) {
+        for (Seminar prerequisite : seminar.getPrerequisites) {
+            if (!seminarsTaken.contains(prerequisite)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List<Seminar> getSeminarsTaken() {
+        return seminarsTaken;
+    }
+}
+</pre>
+</div>
+<p>
+The sample code highlights another aspect of object orientation and the way it is supported in Java: <em>visibility</em>. Notice that the <em>fields</em> (properties) are defined with the word <span class="code">private</span> while the <em>methods</em> (operations) are defined with the word <span class="code">public</span>. These special words define the <em>visibility</em> of the fields and methods. 
+</p>
+<p>
+<em>Public</em> means that any code in the application can &quot;see&quot; the item. <em>Private</em> means the item is visible to code within the same class, but is not visible to any other code. In this example, code outside of a <span class="code">Student</span> instance can &quot;see&quot; the two methods because they are declared <span class="code">public</span>, but the fields can only be accessed directly by code within the same <span class="code">Student</span> instance. 
+</p>
+<p>
+This is Java's way of supporting the object oriented principle, &quot;don't expose your privates.&quot; Each object presents a <em>public interface</em> to the world. Other objects can only interact through this public interface. It would be easy enough to declare the fields <span class="code">public</span>, but then &quot;anyone&quot; could modify the values in any way. By keeping the fields private and controlling access via public methods, the instance can ensure the values are always valid.
+</p>
+<p>
+Java defines four levels of visibility, of which <em>public</em> and <em>private</em> are two. (More on that later.) These words are called <em>access modifiers</em>. They are called <em>modifiers</em> because they &quot;modify&quot; the declaration of a field or method. They deal with the accessibility or visibility of the fields and methods, so they are called <em>access modifiers</em>.
+</p>
+<p>
+So, what does all this stuff look like in a JVM? It looks roughly like this:
+</p>
+<p align="center">
+<a href="images/objects-in-jvm.png" target="_blank" title="click to enlarge"><img src="images/objects-in-jvm2.png" border="0" align="center"/></a>
+</p>
+<p>
+There is a bit more to it than that, but you now have sufficient background information to understand what <span class="code">public static void main(...)</span> means. 
+</p>
+<p>
+Everything is an object. There is a class object and one unique instance object for each instance of the class. In the JVM, they are separate. Everything declared <span class="code">static</span> in the source file resides in the class object. Everything else resides in the instance objects. Any given instance object has visibility to its own copy of the instance fields and methods, and to the single copy of class fields and methods (the <span class="code">static</span> stuff).
+</p>
+<p>
+The <span class="code">void</span> declares the return type of the <span class="code">main</span> method. Any method must return zero or one values. The <em>type</em> of the returned value is specified in the method declaration. When a method returns nothing, it is declared to return <span class="code">void</span>. For instance, in the Student class, the method <span class="code">isEligibleToEnroll()</span> returns a value of type <span class="code">boolean</span>. The <span class="code">main</span> method doesn't return a value, so it is declared to return type <span class="code">void</span>.
+</p>
+<p>
+To start an application, the JVM loads the class file that is specified on the command line, then looks in the class object for a method with the signature <span class="code">public static void main(String[] args)</span>. <span class="code">String</span> is a predefined Java class that contains string data, and the square brackets denote an array; so, <span class="code">String[] args</span> declares an array of string values named &quot;args.&quot; In this context, the array will contain the command line arguments, if any.
+</p>
+<p>
+You can now see that:
+</p>
+<ul>
+<li><span class="code">public</span> means the method is visible to code outside the class;</li>
+<li><span class="code">static</span> means the method lives in the class object and is not copied for each instance object;</li>
+<li><span class="code">void</span> means the method does not return a value;</li>
+<li><span class="code">main</span> is the name of the method; and</li>
+<li><span class="code">args</span> is an array containing the command line arguments, if any, as <span class="code">String</span> instances.</li>
+</ul>
+<p>
+The next question: What does <span class="code">System.out.println(...)</span> mean?
+</p>
+<p>
+<span class="code">System</span> is a class Java predefines, and that is always available in a Java environment. It provides an interface to a few basic facilities of the underlying operating system in a portable way. The dot notation is the way you refer to members of a class or instance; that is, to its fields and methods. For <span class="code">static</span> members, you write the name of the class, then a dot, then the name of the field or method. For instance members, you write the name of the variable where you stored a reference to the instance object, then a dot, then the name of the field or method. 
+</p>
+<p>
+So, in this case:
+<ul>
+<li><span class="code">System</span> is the name of a class;</li>
+<li><span class="code">out</span> is the name of a static member of class <span class="code">System</span>; this object represents the system's standard output stream, which you might know by the name <span class="code">stdout</span> or <span class="code">SYSOUT</span> depending on your background; and</li>
+<li><span class="code">println()</span> is the name of a method that belongs to the <span class="code">out</span> instance. As the method name suggests, it &quot;prints&quot; a string value followed by a line break.</li>
+</ul>
+</p>
+<p>
+The next question: How does the JVM know when to stop the program?
+</p>
+<p>
+We can tell the JVM when to stop an application by calling another predefined method, <span class="code">System.exit()</span>. If we never call <span class="code">System.exit()</span>, the JVM terminates the program when the <span class="code">main</span> method exits.
+</p>
+<p>
+Next question: We compiled, but we never linked. Why?
+</p>
+<p>
+Java programs are executed under the control of a JVM. This is an example of <em>managed code</em>. &quot;Managed code&quot; is a term coined by Microsoft to describe the Common Language Runtime (CLR) environment that executes .NET code. The term has caught on in a more general way to describe any runtime environment that controls how code executes in a (more-or-less) portable way. In hindsight, we can say that IBM's CICS is another example of a managed code environment, although the term &quot;managed code&quot; had not yet been coined at the time CICS was developed.
+</p>
+<p>
+A JVM is a managed code environment. When code runs under control of a managed code environment, the runtime takes care of linkage. That's why you don't have to run a linker after you compile your Java source code. Java is designed to perform <em>late binding</em>. This means the JVM looks up the classes and methods a program calls at runtime. Any language compiler that produces Java byte codes from source can produce programs that will execute in a JVM. Several languages are supported. This is why you will hear some people refer to Java as a &quot;platform&quot; rather than &quot;just a language.&quot;
+</p>
+<p>
+One more question: Why not just stick the <span class="code">main</span> method directly in our application class?
+</p>
+<p>
+We <em>could</em> do that, but there is a general programming principle known as <em>separation of concerns</em>. The <span class="code">main</span> method is concerned with starting and stopping the application. Classes that perform application functionality are concerned with that functionality, and not with starting and stopping the whole application. By keeping these concerns separate, we can re-use our application classes in a variety of contexts.
+</p>
+
+
+
+
+
+</body>
+</html>

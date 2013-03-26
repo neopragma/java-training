@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 4: Exploring Strings</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-3-debrief.html" title="previous">&lt;= Unit 3: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-4-debrief.html" title="next">Unit 4: Debrief =&gt;</a>
+<h1>Unit 4: Exploring Strings</h1>
+<p>
+In general, and especially in business applications, <em>strings</em> are the most common type of data we work with. Java handles string data in a special way, and provides a number of helper classes and methods that facilitate our manipulation of string values. It is worth spending a unit just exploring a few of the basic string handling facilities of Java.
+</p>
+<p>
+Create an Eclipse/Maven project called <span class="code">strings</span>. Use the test-first approach to complete the following User Story. You needn't worry about creating a <span class="code">main</span> method for this; you can just drive it from JUnit and show your results by running your unit test suite.
+</p>
+<div class="code">
+<pre>
+  Feature:
+    As a programmer, I want to explore string handling in Java so that I will be prepared for real programming assignments that involve string values.
+
+  Scenario: Finding the length of a string
+    Given the string "abcdefgh"
+    When I ask the string its length
+    Then it returns 8
+
+  Scenario: Extracting a character from a string based on an index
+    Given the string "abcdefgh"
+    When I extract the character at index 5
+    Then it returns 'f'
+
+  Scenario: Extracting substrings from a string
+    Given the string "abcdefgh"
+    When I extract the substring starting at index 2 and ending at index 6
+    Then it returns "cdef"
+
+    Given the string "abcdefgh"
+    When I extract the substring starting at index 4 with no ending index
+    Then it returns "efgh"
+
+  Scenario: Difference between an empty string and a null reference
+    Given the string ""
+    When I ask the string its length
+    Then it returns 0
+
+    Given an uninitialized string variable
+    When I ask the string its length
+    Then it throws NullPointerException
+
+  Scenario: Converting between upper case and lower case
+    Given the string "albert einstein"
+    When I convert the value to upper case
+    Then it returns "ALBERT EINSTEIN"
+
+    Given the string "RICHARD FEYNMAN"
+    When I convert the value to lower case
+    Then it returns "richard feynman"
+
+    Given the string "RICHARD FEYNMAN"
+    When I convert the value to lower case
+    Then it returns "richard feynman"
+
+    Given the string "i like chinese food"
+    When I format the value as a sentence
+    Then it returns "I like Chinese food."
+
+    Given the string "i like greek food"
+    When I format the value as a sentence
+    Then it returns "I like Greek food."
+
+  Scenario: String concatenation
+    Given the strings "alpha", "beta", "gamma"
+    When I concatenate them using the concatenation operator
+    Then the result is "alpha beta gamma\n"
+
+    Given the strings "alpha", "beta", "gamma"
+    When I concatenate them using StringBuffer
+    Then the result is "alpha beta gamma\n"
+
+    Given the strings "alpha", "beta", "gamma"
+    When I concatenate them using StringBuilder
+    Then the result is "alpha beta gamma\n"
+
+  Scenario: Comparing string values
+    Given the strings "alpha", "beta"
+    When I compare them using equals
+    Then the result is false
+
+    Given the strings "alpha", "beta"
+    When I compare them using compareTo
+    Then the result is -1
+
+    Given the strings "alpha", "alpha"
+    When I compare them using equals
+    Then the result is true
+
+    Given the strings "alpha", "alpha"
+    When I compare them using compareTo
+    Then the result is 0
+
+    Given the strings "alpha", "alpha"
+    When I compare them using the equality operator
+    Then the result is true
+
+    Given the strings "alpha", "alpha"
+    When I compare them using the identity operator
+    Then the result is true
+
+
+
+</pre>
+</div>
+
+</p>
+</body>
+</html>

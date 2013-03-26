@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 3: Fizz Buzz</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-2-debrief.html" title="previous">&lt;= Unit 2: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-3-debrief.html" title="next">Unit 3: Debrief =&gt;</a>
+<h1>Unit 3: Fizz Buzz</h1>
+<p>
+In professional development environments, people don't usually work on the command line or use basic text editors for software development. We have been doing that up to this point because it's important that you understand what's actually happening behind the scenes, and not become dependent on whatever &quot;magic&quot; a development tool might do for you.
+</p>
+<p>
+Many development tools are available for Java. As you work with different clients you will probably have to learn multiple tool sets, multiple libraries, multiple execution environments, and so forth. For this class, we will use a collection of free and open source tools that are widely used in industry. 
+</p>
+<h2>Tool installation</h2>
+<p>
+For purposes of Unit 3, you will need:
+</p>
+<ul>
+<li>a Java Development Kit, version 1.6</li>
+<li>the Eclipse IDE, including the bundled unit testing framework, JUnit</li>
+<li>Maven (dependency manager and build utility)</li>
+<li>The m2eclipse plug-in (to enable running Maven from the Eclipse environment)
+</ul>
+<p>
+If you are not using a preconfigured environment, see the <a href="tools.html" target="_blank">tools page</a> for installation help. 
+</p>
+<h2>Project set-up</h2>
+<p>
+Create a directory under <span class="code">projects</span> named <span class="code">fizzbuzz</span>.
+</p>
+<p>
+Create an Eclipse project named <span class="code">fizzbuzz</span>. If you are unfamiliar with Eclipse, your instructor will walk you through it. Define the following source folders:
+</p>
+<ul>
+<li><span class="code">src/main/java</li>
+<li><span class="code">src/test/java</li>
+</ul>
+<p>
+Remove the default source directory, <span class="code">src</span>.
+</p>
+<p>
+Change the default output directory to <span class="code">fizzbuzz/target</span>.
+</p>
+<p>
+Copy the supplied Maven POM named <span class="code">fizzbuzz-pom.xml</span> to the <span class="code">projects/fizzbuzz</span> directory from <span class="code">assets</span> if you are using a preconfigured environment; otherwise, get it from github or your instructor. Rename the POM file <span class="code">pom.xml</span>.
+</p>
+<p>
+In a command line window, change to the <span class="code">projects/fizzbuzz</span> directory. Run the Maven install goal to cause Maven to download the dependencies for the project:
+</p>
+<div class="code box">
+mvn install
+</div>
+<p>
+Now you're ready to begin work on Fizz Buzz development.
+</p>
+<h2>Lightweight requirements</h2>
+<p>
+Although Fizz Buzz is a pretty simple exercise, we're going to start using lightweight methods to specify the requirements, and we'll take a test-driven approach to development. It's a good idea to get used to working in this way right from the start, so that it won't be too great a learning curve when you're working on a more substantial problem. 
+</p>
+<p>
+The basic idea behind &quot;lightweight requirements&quot; is that we avoid specifying all the details of a solution in advance, and instead we aim for a goal and let the details emerge as we go along. The appropriate amount of up-front analysis and design depends on the circumstances. 
+</p>
+<p>
+A real business application would be developed for the purpose of realizing a business capability. The starting point would be a strategic business plan inspired by an innovative idea, competitive pressure, or changes in regulatory requirements. The software development team might not see any of this high-level planning; their first exposure to the requirements might occur after stakeholders had agreed on a list of high-level features the new software must support. It then becomes the software organization's task to realize these features. 
+</p>
+<p>
+With a traditional approach, technical staff would analyze and specify as much detail as possible about the solution before beginning development. With an adaptive approach, they would analyze and specify only as much detail as necessary to begin development with confidence they were heading in the right direction. 
+</p>
+<p>
+In real-world situations, people usually approach development using a blend of traditional and adaptive methods. Anything that presents a business risk or delivery risk will be addressed early; design details for software features will be deferred until the &quot;last responsible moment&quot; to avoid investing too much effort and money in details that are likely to change. 
+</p>
+<p>
+Before people can begin implementing features, they have to decompose the high-level features into smaller chunks of work. People use functional decomposition, feature mapping, dimensional planning, and other techniques to do this. They usually deal with just one or two high-level features at a time, and defer decomposing the other features until close to the time when they will be implemented. Once functionality has been decomposed into small enough pieces, development begins.
+</p>
+<p>
+The requirements artifacts that support adaptive development do not contain as much detail as traditional requirements specification documents. Instead, they summarize particular interactions between a system actor of some kind (maybe a human user, maybe another system) and the application that is to be built. Common requirements that apply across the board will be documented in some central place, rather than repeated in every functional specification. These may include such things as organizational coding standards; naming conventions; architectural standards; standard ways to handle exceptions, logging, or business activity monitoring; UI branding standards; and various non-functional requirements. Similarly, well-known software engineering practices that &quot;any&quot; programmer ought to know are omitted. These are things like handling invalid input values and protecting the system against buffer overflow exploits and so forth. Technical professionals are expected to know these things without being told, so there is no need to clutter requirements documents with this sort of information.
+</p>
+<p>
+A number of different formats for lightweight requirements artifacts have been defined, and they go by various names such as Use Case Slice, Use Case Scenario, Minimum Marketable Feature, Minimum Usable Feature, and User Story. Regardless of the name or format, any lightweight requirements artifact must have four pieces of information in order to be useful as a guide to development:
+</p>
+<ol>
+<li><em>Who</em> needs the feature</li>
+<li><em>What</em> the feature must do (but not how to implement it)</li>
+<li><em>Why</em> the feature is valuable</li>
+<li><em>How</em> we can be sure the feature is acceptable to stakeholders</li>
+</ol>
+<p>
+We will not cover all the various lightweight requirements artifacts that are used across the industry. We will focus on the User Story. It is the most popular form and is representative of any useful artifact of this kind.
+</p>
+<p>
+A User Story satisfies the first three of the four kinds of information with a one-sentence statement of the purpose of the story. The canonical format is &quot;As a &lt;who&gt; I want to &lt;what&gt; so that &lt;why&gt;. Here's an example:
+</p>
+<p style="margin-left:32px">
+As a bank customer, I want to withdraw money from an ATM so that I won't have to wait in line at the bank.
+</p>
+<p>
+To express the fourth piece of information &mdash; how we will know we have completed the work &mdash; we usually use either the <em>given-when-then</em> format or a tabular format that lists inputs and expected outputs. We write several examples of interactions between the actor and the system in this way, but not necessarily every permutation, because we trust professional developers to use the examples as a guide and fill in the gaps. Here are some examples that might go along with the sample User Story statement above:
+</p>
+<p>
+<pre>
+    Given I am John Smith
+    And my checking account balance is $2,000
+    When I withdraw $100
+    Then the ATM dispenses 5 $20 notes
+
+    Given I am John Smith
+    And my checking account balance is $2,000
+    When I withdraw $100
+    Then my checking account is debited $100
+</pre>
+</p>
+<p>
+All the relevant details for performing a debit are not included. Some of the technical details will be centrally documented. For example, the process of debiting an account probably includes verifying the customer's PIN; logging the transaction in some standard way; performing some sort of fraud detection check; applying preferred customer rewards; and more. These details need not be repeated in every example.
+</p>
+<p>
+Notice that the examples are very similar, except the outcomes. Why not just set up one example and list all the outcomes we're looking for? The reason is that we want any failing example to tell us exactly what the problem is. We don't want to have to plow through 50 different outcomes to figure out which one caused the failure.
+</p>
+<p>
+Notice that the examples mention a customer by name &mdash; John Smith. This is an example of a <em>persona</em>. A persona is a made-up person who represents a given user type and who has a profile that leads him/her to interact with the system in some unique way, providing more information about usage than the user type alone can provide. John Smith might be an individual depositor with the bank &mdash; that is his user type. Beyond that, he might tend to conduct bank business in a certain way due to his lifestyle or personal preferences. Maybe he prefers using his smart phone and ATMs to walking into a bank branch. Maybe he has signed up for overdraft protection. A different persona might represent the same user type (individual depositor) but a different usage pattern. For example, Mary Jones might prefer walking into a bank branch and talking to a live representative. Maybe she has <em>not</em> signed up for overdraft protection. Personas help us craft the behavior of the application appropriately.
+</p>
+<p>
+We will specify the requirements for Fizz Buzz and other programming projects in this way.
+</p>
+<h2>Test-driven development</h2>
+<p>
+Test-driven development, or TDD, means that we build up the code little by little by writing executable test cases that express small examples of the behavior we want to see in the application, and then writing the code that makes those test cases pass. Writing a program with TDD means shifting frequently between test cases and production code, and writing small increments of code. The TDD cycle consists of the following three steps, which we repeat in small increments many, many times in the course of building an application:
+</p>
+<ol>
+<li>Red: Write a test case that fails for the right reason (because the application doesn't exhibit the behavior yet)</li>
+<li>Green: Write the production code that makes the test pass (in the simplest reasonable way)</li>
+<li>Refactor: Clean up the code you've written so far (to avoid accumulating technical debt)</li>
+</ol>
+<p>
+This will be the basic approach you take to all the programming exercises from this point forward.
+</p>
+<h2>Fizz Buzz</h2>
+<p>
+And so we finally get around to describing the Fizz Buzz exercise. Fizz Buzz is a coding exercise that is often used to screen candidates for programmer jobs. It's described in many places online, one of which is <a href="http://c2.com/cgi/wiki?FizzBuzzTest" target="_blank">on the C2 wiki</a>. Here's the User Story for our variant of the exercise:
+</p>
+<div class="code box">
+<pre>
+  Feature:
+    As a programmer, I want to develop a solution to Fizz Buzz so that I can learn something about Java.
+
+  Scenario: Display "Fizz" when the integer is divisible by 3
+    Given a list of integer values in ascending order starting with 1 and ending with 100
+    When the program iterates over the list
+    And the value of the current integer is divisible by 3
+    Then the program writes "Fizz" on a new line
+
+  Scenario: Display "Buzz" when the integer is divisible by 5
+    Given a list of integer values in ascending order starting with 1 and ending with 100
+    When the program iterates over the list
+    And the value of the current integer is divisible by 5
+    Then the program writes "Buzz" on a new line
+
+  Scenario: Display "Fizz" and "Buzz" when the integer is divisible by both 3 and 5
+    Given a list of integer values in ascending order starting with 1 and ending with 100
+    When the program iterates over the list
+    And the value of the current integer is divisible by both 3 and 5
+    Then the program writes "Fizz" and "Buzz" on a new line
+
+  Scenario: Display the integer itself when it is not divisible by 3 or 5
+    Given a list of integer values in ascending order starting with 1 and ending with 100
+    When the program iterates over the list
+    And the value of the current integer is divisible by neither 3 nor 5
+    Then the program writes the integer value on a new line
+</pre>
+</div>
+<p>
+The same behavior can be expressed in tabular form:
+</p>
+<p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr>
+<th>Integer value</th><th>Output</th>
+</tr>
+<tr>
+<td align="center">1</td><td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td><td align="center">2</td>
+</tr>
+<tr>
+<td align="center">3</td><td align="center">Fizz</td>
+</tr>
+<tr>
+<td align="center">4</td><td align="center">4</td>
+</tr>
+<tr>
+<td align="center">5</td><td align="center">Buzz</td>
+</tr>
+<tr>
+<td align="center">6</td><td align="center">Fizz</td>
+</tr>
+<tr>
+<td align="center">7</td><td align="center">7</td>
+</tr>
+<tr>
+<td align="center">8</td><td align="center">8</td>
+</tr>
+<tr>
+<td align="center">9</td><td align="center">Fizz</td>
+</tr>
+<tr>
+<td align="center">8</td><td align="center">8</td>
+</tr>
+<tr>
+<td align="center">9</td><td align="center">Fizz</td>
+</tr>
+<tr>
+<td align="center">10</td><td align="center">Buzz</td>
+</tr>
+<tr>
+<td align="center">11</td><td align="center">11</td>
+</tr>
+<tr>
+<td align="center">12</td><td align="center">Fizz</td>
+</tr>
+<tr>
+<td align="center">13</td><td align="center">13</td>
+</tr>
+<tr>
+<td align="center">14</td><td align="center">14</td>
+</tr>
+<tr>
+<td align="center" valign="top">15</td><td align="center" valign="top">Fizz<br/>Buzz</td>
+</tr>
+</table>
+</p>
+<p>
+In real life, we would not express the same behavior in both formats. We would choose the format that makes more sense in context. In this case, the tabular format could become quite long, and the given-when-then form is more concise and clear. In other cases, the opposite will be true.
+</p>
+<p>
+Now, with your instructor's guidance, you will implement Fizz Buzz in Java using a test-driven development approach. There are several things that may be new to you, including the use of Eclipse, the use of Maven, the use of JUnit, and the practice of writing test cases before you've written any code to test. Don't worry about all that, because you will get used to it fairly quickly.
+</p>
+
+</body>
+</html>

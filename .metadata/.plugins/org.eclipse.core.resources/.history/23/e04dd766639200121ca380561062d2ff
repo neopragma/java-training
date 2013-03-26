@@ -1,0 +1,75 @@
+package com.neopragma.manning;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Scanner;
+
+/**
+ * Command-line application driver
+ * 
+ * @author neopragma
+ * @version 1.0.0
+ */
+public class Driver {
+	
+	private RuntimeOptions runtimeOptions = null;
+	private Writer writer = null;
+
+	public void run(String[] args) throws Exception {
+		try {
+			runtimeOptions = new RuntimeOptions(args);
+		} catch (InvalidRuntimeOptionException e) {
+			err(e.getMessage());
+			return;
+		}
+		StringBuilder pipedInput = new StringBuilder();
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNextLine()) {
+        	pipedInput.append(sc.nextLine());
+        }
+        if (runtimeOptions.isSet(OptionName.OUTPUT_FILE)) {
+        	writeToFile(pipedInput.toString());
+        } else {
+        	System.out.println(pipedInput.toString());
+        }
+	}
+	
+	/**
+	 * Copy the input to the specified file.
+	 * 
+	 * @param filename
+	 * @throws IOException
+	 */
+	void writeToFile(String data) throws IOException {
+		writer().write(data);
+		writer().close();
+		setWriter(null);
+	}
+	
+	void setWriter(Writer writer) {
+		this.writer = writer;
+	}
+	
+	Writer writer() throws IOException {
+		if (writer == null) {
+			writer = new FileWriter((File) runtimeOptions.get(OptionName.OUTPUT_FILE).getValue());
+		}
+		return writer;
+	}
+
+	//TODO add proper logging
+	void info(String message) {
+		warn(message);
+	}
+	
+	void warn(String message) {
+		System.out.println(message);
+	}
+	
+	void err(String message) {
+		System.err.println(message);
+	}
+	
+}

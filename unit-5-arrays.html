@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 5: Arrays</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-4-debrief.html" title="previous">&lt;= Unit 4: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-5-debrief.html" title="next">Unit 5: Debrief =&gt;</a>
+<h1>Unit 5: Arrays</h1>
+<p>
+An <em>array</em> is a list of data values of the same type. In Java, you define an array by declaring the type of its elements and coding a pair of square brackets. For example:
+<ul>
+<li><span class="code">Employee[] employees;</span> &mdash; declares an array of Employee instances, length to be determined.</li>
+<li><span class="code">String[] names = new String[5];</span> &mdash; allocate storage for an array of five String values (each is null at this point).</li>
+<li><span class="code">String[] names = { "Smith", "Chang", "Kamenov", "LeBlanc", "Tanaka" };</span> &mdash; allocate storage for an array of five String values and initialize the values.</li>
+<li>
+<div class="code box">
+<pre>
+int[][] sensorReadings = new int[12][4];
+Arrays.fill(sensorReadings, -1);
+</pre>
+</div>
+Allocate storage for a two-dimensional array of int values and initialize the elements to -1.
+</li>
+</ul>
+</p>
+<p>
+Java also provides a convenient class containing utility methods to perform common array operations, <span class="code">java.util.Arrays</span>. The <span class="code">fill</span> method illustrated above is a static method of this class.
+</p>
+<p>
+In this unit you will write code that operates on arrays. As a secondary learning goal, you will write a custom exception class named <span class="code">UndefinedProductException</span> that you will throw when your matrix multiplication method cannot multiply two arrays because they have incompatible dimensions.
+</p>
+<p>
+For help with matrix multiplication, refer to <a href="http://www.mathwarehouse.com/algebra/matrix/multiply-matrix.php" target=
+"_blank">http://www.mathwarehouse.com/algebra/matrix/multiply-matrix.php</a>. For help with mean, median, and mode refer to <a href="http://www.purplemath.com/modules/meanmode.htm" target="_blank">http://www.purplemath.com/modules/meanmode.htm</a>.
+</p>
+<p>
+Here is the User Story for this unit:
+</p>
+<div class="code box">
+<pre>
+  Feature:
+    As a Java programmer, I want to learn how to use Java's facilities 
+    for managing arrays so that I can be a more effective 
+    Java professional.
+
+  Scenario: Accessing array elements
+    Given an array of int values 3, 9, 6, 6, 3, 12, 7, 6, 5
+    When I access the element at index 4
+    Then the result is 3
+
+    Given an array of int values 3, 9, 6, 6, 3, 12, 7, 6, 5
+    When I access the last element
+    Then the result is 8
+
+    Given an array of int values 3, 9, 6, 6, 3, 12, 7, 6, 5
+    When I access the element at index 9
+    Then it throws ArrayIndexOutOfBoundsException
+
+    Given an array of int values 3, 9, 6, 6, 3, 12, 7, 6, 5
+    When I search for the first entry with value 6
+    Then it returns index value 4
+
+    Given an array of int values
+            6  4  3  7
+            0  5  8  1
+    When I access the element at index 1, 2
+    Then it returns 8
+
+  Scenario: Working with array elements
+    Given an array of int values 4, 8, 22, 6, 14, 10, 4
+    When I calculate the mean
+    Then the result is 9.7 with a tolerance of 0.05
+
+    Given an array of int values 4, 8, 22, 6, 14, 10, 4
+    When I find the mode
+    Then the result is 4
+
+    Given an array of int values 4, 8, 22, 6, 14, 10, 4
+    When I find the median
+    Then the result is 8
+
+  Scenario: Matrix arithmetic
+    Given a two-dimensional array of int values 
+            4  12  10
+           10   5   6
+    When I multiply the array by the scalar value 3
+    Then the result is the array
+           12  36  30
+           30  15  18
+
+    Given an array of int values 
+            4  12  10
+           10   5   6
+    And an array of int values 
+            2  12
+           10   5
+            3   4
+    When I multiply the arrays
+    Then the result is the array
+           158 148
+           100 169
+
+    Given an array of int values
+            20 13 84
+            10  7 55
+    And an array of int values
+             8   3   9  34   6 
+            14  29  86  19  11
+            10  20  30  40  50
+            16  18   8   5   0
+    When I multiply the arrays
+    Then it throws UndefinedProductException
+
+  Scenario: Using methods of the Arrays class
+    Given an array of int values 3, 4, 5, 6, 7, 8
+    When I call copyOfRange(2, 5)
+    Then the result is an array of int values 5, 6, 7 
+
+    Given an array of int values 3, 4, 5, 6, 7, 8
+    When I call fill(2, 5, 99)
+    Then the original array contains 3, 4, 99, 99, 99, 8 
+
+    Given an array of int values 3, 4, 5, 6, 7, 8
+    And a custom method named extract
+    When I call extract(2, 5, 0)
+    Then it returns a new array containing 5, 6, 7
+    And the original array contains 3, 4, 0, 0, 0, 8
+
+    Given an array of int values 6, 3, 9, 4, 2, 10
+    When I call sort
+    Then the result is an array of int values 2, 3, 4, 6, 9, 10
+</pre>
+</div>
+</p>
+<p>
+</p>
+</body>
+</html>

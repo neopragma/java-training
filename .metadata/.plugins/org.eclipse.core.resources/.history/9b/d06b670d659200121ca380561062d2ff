@@ -1,0 +1,164 @@
+package com.sample.commandlineapp;
+
+import static com.sample.testhelpers.ConsoleHelper.playbackSystemErr;
+import static com.sample.testhelpers.ConsoleHelper.playbackSystemOut;
+import static com.sample.testhelpers.ConsoleHelper.recordSystemErr;
+import static com.sample.testhelpers.ConsoleHelper.recordSystemOut;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+public class DriverTest {
+	
+	private Driver driver;
+	private static final String expectedHelpText = "xml2html [--version] [--help] [--recursive] [--inputdir dirname] --outputdir dirname input1 [input2] ... [inputn]";
+	
+	@Before
+	public void before_each_test_case() {
+		driver = new Driver();
+	}
+	
+	@Test
+	public void it_displays_help_when_long_option_help_is_passed() throws Exception {
+		recordSystemErr();
+        driver.run(withArgs("--help"));
+        assertThat(playbackSystemErr(), containsString(expectedHelpText));
+	}
+	
+	@Test
+	public void it_displays_help_when_short_option_h_is_passed() throws Exception {
+		recordSystemErr();
+        driver.run(withArgs("-h"));
+        assertThat(playbackSystemErr(), containsString(expectedHelpText));
+	}
+	
+	@Test
+	public void it_displays_version_when_long_option_version_is_passed() throws Exception {
+		recordSystemErr();
+        driver.run(withArgs("--version"));
+        assertThat(playbackSystemErr(), containsString("1.0.0"));
+	}
+	
+	@Test
+	public void it_displays_version_when_short_option_v_is_passed() throws Exception {
+		recordSystemErr();
+        driver.run(withArgs("-v"));
+        assertThat(playbackSystemErr(), containsString("1.0.0"));
+	}
+	
+	@Test
+	public void it_displays_help_when_no_output_directory_is_specified_via_long_option() throws Exception {
+		recordSystemErr();
+        driver.run(withArgs("--outputdir"));
+        assertThat(playbackSystemErr(), containsString(expectedHelpText));
+	}
+	
+	@Test
+	public void it_displays_help_when_no_output_directory_is_specified_via_short_option() throws Exception {
+		recordSystemErr();
+        driver.run(withArgs("-o"));
+        assertThat(playbackSystemErr(), containsString(expectedHelpText));
+	}
+	
+	@Test
+	public void it_complains_and_dies_when_the_output_directory_is_not_a_directory() throws IOException, SAXException, ParserConfigurationException {
+		recordSystemErr();
+		driver.run(withArgs("--outputdir", "tempdir/dummy1.xml"));
+		assertThat(playbackSystemErr(), containsString("Value for --outputdir must be a directory"));
+	}
+	
+	@Test
+	public void it_displays_help_when_no_input_directory_is_specified_via_long_option() throws IOException, SAXException, ParserConfigurationException {
+		recordSystemErr();
+        driver.run(withArgs("--inputdir"));
+        assertThat(playbackSystemErr(), containsString(expectedHelpText));
+	}
+	
+	@Test
+	public void it_displays_help_when_no_input_directory_is_specified_via_short_option() throws IOException, SAXException, ParserConfigurationException {
+		recordSystemErr();
+        driver.run(withArgs("-i"));
+        assertThat(playbackSystemErr(), containsString(expectedHelpText));
+	}
+	
+	@Test
+	public void it_complains_and_dies_when_inputdir_is_not_a_directory() throws IOException, SAXException, ParserConfigurationException {
+		File temp = File.createTempFile(this.getClass().getSimpleName(), ".xml");
+		recordSystemErr();
+		driver.run(withArgs("--inputdir", temp.getAbsolutePath()));
+		temp.delete();
+		assertThat(playbackSystemErr(), containsString("Value for --inputdir must be a directory"));
+	}
+	
+	@Test
+	public void it_complains_and_dies_when_at_least_one_input_file_is_not_specified() throws IOException, SAXException, ParserConfigurationException {
+		recordSystemErr();
+		driver.run(withArgs("--outputdir", TESTDIR));
+		assertThat(playbackSystemErr(), containsString("At least one input file or the --inputdir option must be specified"));
+	}
+	
+	@Test
+	public void it_accepts_a_list_of_three_input_files() throws IOException, SAXException, ParserConfigurationException {
+		XmlToHtml converter = injectMockConverter();
+		when(converter.documentAsHtml()).thenReturn("<book></book>");
+		driver.run(withArgs("--outputdir", TESTDIR, 
+				TESTDIR + "/dummy1.xml",
+				TESTDIR + "/dir1/dummy4.xml",
+				TESTDIR + "/dir1/dir2/dummy6.xml"));
+		verify(converter, times(3)).parseDocument(any(InputSource.class));
+	}
+	
+	@Test
+	public void it_recursively_processes_input_directories_when_recursive_is_specified_and_inputdir_is_not_specified() throws IOException, SAXException, ParserConfigurationException {
+		XmlToHtml converter = injectMockConverter();
+		doReturn("").when(converter).documentAsHtml();
+		driver.run(withArgs("--recursive", "--outputdir", TESTDIR, TESTDIR));
+		verify(converter, times(7)).parseDocument(any(InputSource.class));
+	}
+	
+	@Test
+	public void it_recursively_processes_input_directories_by_default_when_inputdir_is_specified() throws IOException, SAXException, ParserConfigurationException {
+		XmlToHtml converter = injectMockConverter();
+		doReturn("").when(converter).documentAsHtml();
+		driver.run(withArgs("--inputdir", TESTDIR, "--outputdir", TESTOUT));
+		verify(converter, times(7)).parseDocument(any(InputSource.class));
+	}
+	
+	@Test
+	public void it_complains_and_continues_when_inputdir_is_not_specified_and_an_input_file_is_a_directory_is_specified_for_input_and_recursive_option_is_not_set() throws Exception {
+		XmlToHtml converter = injectMockConverter();
+		when(converter.documentAsHtml()).thenReturn("<book></book>");
+		recordSystemOut();
+		driver.run(withArgs("--outputdir", TESTDIR, 
+			TESTDIR + "/dir1/dummy4.xml",
+			TESTDIR,
+			TESTDIR + "/dummy1.xml"));
+		verify(converter, times(2)).parseDocument(any(InputSource.class));		
+		assertThat(playbackSystemOut(), containsString("testdir: To process an input directory, specify --recursive or -r\n"));
+	}
+
+	@Test
+	public void it_names_the_output_file_based_on_the_input_file_name_and_output_directory_when_no_inputdir_is_specified() throws Exception {
+		assertThat(driver.makeOutputFilenameBasedOn("foo.xml",  new File("bardir")), equalTo("bardir/foo.html"));
+	}
+	
+	private String[] withArgs(String... args) {
+		return args;		
+	}
+	
+	private XmlToHtml injectMockConverter() {
+		XmlToHtml converter = mock(XmlToHtml.class);
+		driver.setConverter(converter);
+		return converter;
+	}
+}

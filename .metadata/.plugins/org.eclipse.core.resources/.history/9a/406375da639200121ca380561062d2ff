@@ -1,0 +1,20 @@
+package com.sample.commandlineapp;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.junit.Test;
+
+public class XmlElementTest {
+	
+	@Test
+	public void toEnum_instantiates_the_enum_corresponding_to_the_string_argument() {
+		assertThat(XmlElement.toEnum("para"), equalTo(XmlElement.PARA));
+	}
+	
+	@Test
+	public void toEnum_returns_UNSUPPORTED_when_an_unsupported_tag_name_is_provided() {
+		assertThat(XmlElement.toEnum("no such thing"), equalTo(XmlElement.UNSUPPORTED));
+	}
+
+}

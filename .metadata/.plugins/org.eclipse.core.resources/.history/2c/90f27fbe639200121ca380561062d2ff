@@ -1,0 +1,6 @@
+package com.neopragma.manning;
+
+public enum OptionName {
+	ECHO,
+	OUTPUT_FILE;
+}

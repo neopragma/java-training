@@ -1,0 +1,16 @@
+body {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 1em;
+}
+li {
+	margin-top: 16px;
+}
+.code {
+	font-family: Courier New,monospaced;
+}
+.box {
+	border: 1px dotted #333;
+	margin: 8px;
+	padding: 4px;
+	background-color: #eee;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 6: Equality</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-5-debrief.html" title="previous">&lt;= Unit 5: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-6-debrief.html" title="next">Unit 6: Debrief =&gt;</a>
+<h1>Unit 6: Equality</h1>
+<p>
+Comparing two instances for equality is a little more complicated that you might expect. In this unit, you will explore the problem of instance equality in some depth.
+</p>
+<p>
+The goals of this unit are:
+<ol>
+<li>Explore the problem of equality between instances of Java objects;</li>
+<li>Learn about an assertion framework known as Hamcrest, that offers a somewhat more robust way of asserting the expected results of test cases than the assertions available with JUnit alone; and</li> 
+<li>Learn about Java <em>interfaces</em>, which is one of the mechanisms by which the Java language supports the object-oriented concept of <em>abstraction</em></li>
+</ol>
+</p>
+<p>
+The first step is to set up an Eclipse/Maven project for the unit, named <em>equality</em>. By now you know how to do this. You can copy the POM from Unit 4 and change the names of things; the structure and dependencies defined in the POM are the same for this unit.
+</p>
+<p>
+Here is the User Story for Unit 5:
+</p>
+<div class="code box">
+<pre>
+  Feature:
+    As a Java programmer, I want to learn how to use Java's facilities 
+    for comparing instances for equality so that I can be a more effective 
+    Java professional.
+
+  Scenario: Comparing two Double instances
+    Given a Double with value 12.5
+    And a Double with value 10.25
+    When I compare the instances using equals
+    Then the result is false
+
+    Given a Double with value 12.5
+    And a Double with vvalue 10.25
+    When I compare the instances using compareTo
+    Then the result is -1
+
+  Scenario: Comparing instances of a custom class
+    Given a Person class with a String attribute of "name"
+    And a Person instance with "name" of "John"
+    And a Person instance with "name" of "Mary"    
+    When I compare the instances using equals
+    Then the result is false
+
+    Given a Person class with a String attribute of "name"
+    And a Person instance with "name" of "John"
+    And a different Person instance with "name" of "John"    
+    When I compare the instances using equals
+    Then the result is true
+
+    Given a Person class with a String attribute of "name"
+    And a Person instance with "name" of "John"
+    And a different Person instance with "name" of "John"    
+    When I compare the instances using the equality operator
+    Then the result is false
+
+    Given a Person class with a String attribute of "name"
+    And a Person instance with "name" of "John"
+    When I compare the instance to itself using the equality operator
+    Then the result is true
+
+    Given a Person class with a String attribute of "name"
+    And a Person instance with "name" of "John"
+    When I compare the instance to a String value of "John" using equals
+    Then the result is false
+</pre>
+</div>
+</p>
+<p>
+</p>
+</body>
+</html>
