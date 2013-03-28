@@ -1,16 +1,80 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Unit 9: Text Formatting and Messages</title>
 <link rel="stylesheet" type="text/css" href="base.css">
 </style>
 </head>
 <body>
-<a href="unit-8-debrief.html" title="previous">&lt;= Unit 8: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-7-debrief.html" title="next">Unit 8: Debrief =&gt;</a>
-<h1>Unit 9: Text Formatting and Messages</h1>
+<a href="unit-8-debrief.html" title="previous">&lt;= Unit 8: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-9-debrief.html" title="next">Unit 9: Debrief =&gt;</a>
+<h1>Unit 9: Text Formatting and Message</h1>
 <p>
-TBD. Format, NumberFormat, DecimalFormat, DateFormat, MessageFormat, numeric format specifiers.
+Learning goals for this unit are:
+<ol>
+<li>Using subclasses of the <span class="code">Format</span> class to prepare various kinds of information for display.</li>
+<li>Using the <span class="code">BigDecimal</span> class to handle decimal values.</li>
+<li>Combining message formatting with internationalization.</li>
+</ol>
+</p>
+<h2>User Story 1: Formatting currency values</h2>
+<p>
+To implement the following User Story, write a method that computes the final amount due by applying a tax rate to the total sale price. Look up the <span class="code">BigDecimal</span> class to see how to perform arithmetic operations on decimal values and control rounding. Then write a method that formats the computed value for display. Look up the <span class="code">DecimalFormat</span> class to see how to format decimal values to include commas, decimal points, and currency symbols while suppressing the display of leading zeroes.
 </p>
 <p>
+<div class="code box">
+<pre>
+  Feature: As a programmer, I want to be able to format numerical values for logging and for display
+    so that the messages will convey clear information
+
+  Scenario: Formatting currency values
+    Given no locale is set
+    And the default locale is "US English"
+    And the total sale price is 1,849.58 dollars
+    And the sales tax rate is 7.5%
+    When I request the amount due
+    Then the result is "$1,988.30"
+
+    Given locale "Germany" is set
+    And the total sale price is 1,849.58 euro
+    And the sales tax rate is 7.5%
+    When I request the amount due
+    Then the result is "1.988,30 €"
+</pre>
+</div>
+</p>
+<h2>User Story 2: Formatting messages</h2>
+<p>
+To implement the following user story, read about the <span class="code">MessageFormat</span> class and how to define placeholders in messages for values that you supply at runtime. Message text is supplied that you can use to populate <span class="code">.properties</span> files to back a <span class="code">ResourceBundle</span> for localized messages. You will have to put the numbered placeholders in the appropriate places in the messages. 
+</p>
+<p>
+Note that the substitution variables occur in a different order for different languages, depending on how statements are formulated in each language. For example, in the &quot;Printer is out of paper&quot; scenario, the paper size occurs first in the French version while the tray number occurs first in the Japanese version. Your Java code should not have to know about this; you can handle it by defining the placeholders in the message text appropriately.
+</p>
+<p>
+<div class="code box">
+<pre>
+  Feature: As a programmer, I want to be able to format messages for logging and for display
+    so that the messages will convey clear information
+
+  Scenario: Printer is jammed
+    Given no locale is set
+    And the default locale is "US English"
+    When printer "2FL899" is jammed
+    Then it displays "Printer 2FL899: paper jam" 
+
+    Given locale "Germany" is set
+    When printer "2FL899" is jammed
+    Then it displays "Drucker 2FL899: Papierstau" 
+
+  Scenario: Printer is out of paper
+    Given locale "France" is set
+    When the printer is out of paper
+    Then it displays "Chargez du papier A4 dans le bac 3" 
+
+    Given locale "Japan" is set
+    When the printer is out of paper
+    Then it displays "トレイ3にA4サイズの用紙をセットしてください" 
+</pre>
+</div>
 </p>
 <p>
 </p>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="31"
+   name=""
+   committed-date="2007-01-28T02:26:45.286852Z"
+   url="file://localhost/Users/dave/svn/i18n_application/src/main/java/com/davenicolette/i18n/workshop/app"
+   last-author="dave"
+   kind="dir"
+   repos="file://localhost/Users/dave/svn"
+   revision="31"/>
+<entry
+   committed-rev="31"
+   name="HelloWorldSolution1.java"
+   text-time="2007-01-27T23:10:45.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="6ece72aeb9a5434efa69a21909732694"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-28T02:26:44.000000Z"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld.java"
+   text-time="2007-01-27T21:15:50.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="e1a615d942a6fa76bf4b9deaa7f7df04"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-28T02:26:44.000000Z"/>
+<entry
+   committed-rev="31"
+   name="HelloWorldSolution5.java"
+   text-time="2007-01-28T01:32:45.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="6056d75ade644e0e85a248e61646f11d"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-28T02:26:44.000000Z"/>
+<entry
+   committed-rev="31"
+   name="HelloWorldSolution6.java"
+   text-time="2007-01-28T02:18:08.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="2281fa74635e0b16c698548beb16edbf"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-28T02:26:44.000000Z"/>
+</wc-entries>

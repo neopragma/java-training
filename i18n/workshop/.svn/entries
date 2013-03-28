@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="31"
+   name=""
+   committed-date="2007-01-28T02:26:45.286852Z"
+   url="file://localhost/Users/dave/svn/i18n_application/src/main/java/com/davenicolette/i18n/workshop"
+   last-author="dave"
+   kind="dir"
+   repos="file://localhost/Users/dave/svn"
+   revision="31"/>
+<entry
+   name="app"
+   kind="dir"/>
+<entry
+   name="resources"
+   kind="dir"/>
+</wc-entries>

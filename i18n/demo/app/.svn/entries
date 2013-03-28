@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="28"
+   name=""
+   committed-date="2007-01-21T01:22:46.036033Z"
+   url="file://localhost/Users/dave/svn/i18n_application/src/main/java/com/davenicolette/i18n/demo/app"
+   last-author="dave"
+   kind="dir"
+   repos="file://localhost/Users/dave/svn"
+   revision="28"/>
+<entry
+   committed-rev="28"
+   name="BidirectionalTextEntry.java"
+   text-time="2007-01-17T03:34:19.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="0280d4d8a961933add9e2579f8419d95"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-21T01:22:45.000000Z"/>
+<entry
+   committed-rev="28"
+   name="Helpers.java"
+   text-time="2007-01-11T05:08:22.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="79be28178da25813e2438169797435f4"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="39"
+   name="Babel.java"
+   text-time="2007-02-08T02:03:23.000000Z"
+   committed-date="2007-02-08T02:04:01.735608Z"
+   checksum="c9bcc1cf8191cbd4aa768688f4a247af"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-21T01:22:45.000000Z"
+   revision="39"/>
+<entry
+   committed-rev="28"
+   name="ResourceBundleSearch.java"
+   text-time="2007-01-17T03:26:21.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="1aa78d159c3df1f94d48fe2930256275"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-21T01:22:45.000000Z"/>
+<entry
+   committed-rev="28"
+   name="HelloWorldHardcoded.java"
+   text-time="2007-01-11T04:37:22.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="4773397a78ae3a020620c7bd9305350d"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-21T01:22:45.000000Z"/>
+<entry
+   committed-rev="28"
+   name="CollationWestern.java"
+   text-time="2007-01-16T22:41:42.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="5b5c76554ef8570efad2bb9067be6f57"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-21T01:22:45.000000Z"/>
+<entry
+   committed-rev="28"
+   name="ListDaysOfTheWeek.java"
+   text-time="2007-01-16T02:56:37.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="77031b94e85eed5db46fc66db4473f58"
+   last-author="dave"
+   kind="file"
+   prop-time="2007-01-21T01:22:45.000000Z"/>
+</wc-entries>

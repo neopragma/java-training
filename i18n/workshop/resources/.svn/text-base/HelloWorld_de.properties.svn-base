@@ -1,0 +1,4 @@
+# Hello World localized text: German
+# This file is given as a starting point for Challenge #1.
+
+greeting = Hallo, Welt!

@@ -1,0 +1,20 @@
+Matt - class in Java, PHP, JavaScript, Python
+
+Karen - VB, VBA, database, html, some Java self taught
+
+James - Java / JavaScript / Spring / JEE / Hibernate
+
+Angel - Java since January, COBOL, Foxpro, some database, C, C++
+
+Barb - C++, shell, JavaScript, jQuery mobile, RoR, Java self taught
+
+Mike - game / simulation programming C++, 3 classes on Java, unix, html, php, mysql
+
+Marius - PL/I, PL/SQL, database, structured programming, business analysis, C#
+
+Mary - COBOL, Java, C++, C#
+
+Harrison - C++, Java, Android, server side Java, mysql, php
+
+where is the program (windows)?
+dir program.exe /s

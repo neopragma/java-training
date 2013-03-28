@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 11: Date and Time</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-10-debrief.html" title="previous">&lt;= Unit 10: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-11-debrief.html" title="next">Unit 11: Debrief =&gt;</a>
+<h1>Unit 11: Date and Time</h1>
+<p>
+TBD. Format, NumberFormat, DecimalFormat, DateFormat, MessageFormat, numeric format specifiers. Logging.
+</p>
+<p>
+<div class="code box">
+<pre>
+  Feature: As a programmer, I want to be able to format date and time information for display
+    so that I can present the information in a readable form
+
+  Scenario: Formatting date and time values
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I call the toString method
+    Then the result is "Tue Apr 15 22:34:07 EST 2014"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the default format with DateFormat.getInstance
+    Then the result is "4/15/14 10:34 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the default format with DateFormat.getTimeInstance
+    Then the result is "10:34:07 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the default format with DateFormat.getDateTimeInstance
+    Then the result is "Apr 15, 2014 10:34:07 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the DateFormat.SHORT format with DateFormat.getTimeInstance
+    Then the result is "10:34 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the DateFormat.MEDIUM format with DateFormat.getTimeInstance
+    Then the result is "10:34:07 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the DateFormat.LONG format with DateFormat.getTimeInstance
+    Then the result is "10:34:07 PM EST"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the DateFormat.SHORT format with DateFormat.getDateTimeInstance
+    Then the result is "4/15/14 10:34 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the DateFormat.MEDIUM format with DateFormat.getDateTimeInstance
+    Then the result is "Apr 15, 2014 10:34 PM"
+
+    Given date April 15, 2014 and time 10:34:07 PM
+    When I use the DateFormat.LONG format with DateFormat.getDateTimeInstance
+    Then the result is "April 15, 2014 10:34:07 PM EST"
+
+
+</pre>
+</div>
+</p>
+<p>
+</p>
+</body>
+</html>

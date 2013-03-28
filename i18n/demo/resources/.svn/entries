@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="28"
+   name=""
+   committed-date="2007-01-21T01:22:46.036033Z"
+   url="file://localhost/Users/dave/svn/i18n_application/src/main/java/com/davenicolette/i18n/demo/resources"
+   last-author="dave"
+   kind="dir"
+   repos="file://localhost/Users/dave/svn"
+   revision="28"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_en_CA.java"
+   text-time="2007-01-13T23:26:19.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="7de11f139639dfef0884f249c98ff0b9"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_arc.java"
+   text-time="2007-01-13T23:25:16.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="3a1af697aaa0e533e0c34fae61e86a3c"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_ru.java"
+   text-time="2007-01-13T23:27:28.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="293a7d4f118f69d83263d217757cdb95"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_wel.java"
+   text-time="2007-01-13T23:27:50.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="0f301fc9c8bfd78f2794ea01b96b8cd5"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_ja.java"
+   text-time="2007-01-13T23:27:02.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="5e75c1652e96e446e4b621422afc362c"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Whoopie_en.properties"
+   text-time="2007-01-15T17:04:15.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="b85e839ff42d445302a16a17ac8b6127"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_fi.java"
+   text-time="2007-01-13T23:26:38.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="9f495b9113b79e84c0b408b4423a7da3"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Whoopie_en.java"
+   text-time="2007-01-15T17:12:24.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="c0b0a49dfece7f4d5322df11986686ef"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_en.java"
+   text-time="2007-01-13T23:25:45.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="36560180a1a39817424fd21f2af8c94c"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Babel_unicode_ar.java"
+   text-time="2007-01-13T23:22:37.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="e92b7c9436ce60510fc3f727e0648a57"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Whoopie_en_US_ValleyGirl.java"
+   text-time="2007-01-15T17:24:11.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="5dafd509b27ad6462bfd6f3d8a55200d"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="28"
+   name="Whoopie_en_US.properties"
+   text-time="2007-01-15T17:23:06.000000Z"
+   committed-date="2007-01-21T01:22:46.036033Z"
+   checksum="7351d0f6fe3718e350966904a82c27ef"
+   last-author="dave"
+   kind="file"/>
+</wc-entries>

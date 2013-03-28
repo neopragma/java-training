@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="31"
+   name=""
+   committed-date="2007-01-28T02:26:45.286852Z"
+   url="file://localhost/Users/dave/svn/i18n_application/src/main/java/com/davenicolette/i18n/workshop/resources"
+   last-author="dave"
+   kind="dir"
+   repos="file://localhost/Users/dave/svn"
+   revision="31"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld5_en_US.properties"
+   text-time="2007-01-28T01:07:53.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="25331bb7e4ff0398ee819a22a6ff836b"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld6_en_US.properties"
+   text-time="2007-01-28T01:07:53.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="25331bb7e4ff0398ee819a22a6ff836b"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld_en_UK.properties"
+   text-time="2007-01-27T22:13:12.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="fdc39d8a6da4f2b431be0d99d1a5fe32"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld_en.properties"
+   text-time="2007-01-27T22:12:50.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="21dedd3ae8d429c07e052fd36bd8f084"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld5.properties"
+   text-time="2007-01-28T01:07:02.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="747bd25eebe7f9de34e5ba6f1ff710b9"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld.java"
+   text-time="2007-01-27T23:05:12.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="0918bf96f14558dedc381a249d3e9022"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld6.properties"
+   text-time="2007-01-28T02:01:11.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="8a6e9c4e7646923698a7150c9abec505"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld_en_US.properties"
+   text-time="2007-01-27T22:13:47.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="73943888acb52b6794c867c579a59d11"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld5_en_US_tx.properties"
+   text-time="2007-01-28T01:07:42.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="be4f41bdc4e69b405394f86172cb3a1b"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="SampleListResourceBundle.java"
+   text-time="2007-01-27T23:01:28.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="7e8919bb0ef7d6716c9a0d7022d0378d"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld6_en_US_tx.properties"
+   text-time="2007-01-28T01:07:42.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="be4f41bdc4e69b405394f86172cb3a1b"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld5_de.properties"
+   text-time="2007-01-28T01:07:15.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="e423a66f0c86288c017d13f79ef649e0"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld6_de.properties"
+   text-time="2007-01-28T01:53:59.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="c17b425d798ed3597477d6e62d0d72a6"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld.properties"
+   text-time="2007-01-27T21:36:16.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="a7b35a2ffc52912c3c22b6fb7f4ed8d0"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld_en_US_tx.properties"
+   text-time="2007-01-28T00:35:20.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="205556ca5aa554d1e9b0ba9dd952ab46"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld5_en_UK.properties"
+   text-time="2007-01-28T01:07:31.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="9d97bda669a254440f7c8c100e1101eb"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld5_en.properties"
+   text-time="2007-01-28T01:08:03.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="7fb431c61f6d07cb744833fcfeedc650"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld6_en_UK.properties"
+   text-time="2007-01-28T01:07:31.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="9d97bda669a254440f7c8c100e1101eb"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld_de.properties"
+   text-time="2007-01-27T21:37:42.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="c52f6dfbd380a59c4881b4dad3844533"
+   last-author="dave"
+   kind="file"/>
+<entry
+   committed-rev="31"
+   name="HelloWorld6_en.properties"
+   text-time="2007-01-28T02:01:19.000000Z"
+   committed-date="2007-01-28T02:26:45.286852Z"
+   checksum="70c6fb520a1da59d442fac8a6ffd34b8"
+   last-author="dave"
+   kind="file"/>
+</wc-entries>

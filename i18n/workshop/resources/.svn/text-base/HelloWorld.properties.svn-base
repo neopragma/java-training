@@ -1,0 +1,4 @@
+# Default resource bundle for the HelloWorld program
+# This file is given as a starting point for Challenge #1.
+
+greeting = Hello, World!
