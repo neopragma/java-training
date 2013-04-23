@@ -1,11 +1,10 @@
 package calc.sample;
-
-import static org.hamcrest.Matchers.closeTo;
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-
+    
 import org.junit.Before;
 import org.junit.Test;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.closeTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CalcTest {
 	
@@ -99,7 +98,7 @@ public class CalcTest {
 	}
 
 	@Test
-	public void it_finds_the_exponent_of_a_real_number() {
+	public void it_finds_the_exponent_of_real_number() {
 		calc.enter("5.5");
 		calc.enter("3");
 		calc.enter("^");
@@ -113,7 +112,7 @@ public class CalcTest {
 		calc.clear();
 		assertThat(calc.result(), equalTo(""));
 	}
-	
+		
 	@Test
 	public void it_ignores_null_entries() {
 		calc.enter("2");
@@ -130,6 +129,58 @@ public class CalcTest {
 		calc.enter("6");
 		calc.enter("*");
 		assertThat(calc.result(), equalTo("12"));
+	}
+	
+	@Test
+	public void it_complains_when_too_few_arguments_are_passed() {
+		calc.enter("2");
+		calc.enter("+");
+		assertThat(calc.getCurrentMessages()[0], equalTo("Wrong number of arguments for the '+' operator"));
+	}
+		
+	@Test
+	public void it_complains_when_too_many_arguments_are_passed() {
+		calc.enter("2");
+		calc.enter("4");
+		calc.enter("6");
+		calc.enter("*");
+		assertThat(calc.getCurrentMessages()[0], equalTo("Wrong number of arguments for the '*' operator"));
+	}
+	
+	@Test
+	public void it_returns_an_array_of_help_messages_when_help_is_requested() {
+		String[] expectedHelpMessages = {
+			"c clear calculator memory",
+			"h display help text",
+			"q quit",
+			"r display current result",
+			"+ add",
+			"- subract",
+			"* multiply",
+			"/ divide",
+			"% modulo", 
+			"^ exponentiation" };
+		calc.enter("h");
+		assertThat(calc.getCurrentMessages(), equalTo(expectedHelpMessages));
+	}
+	
+	@Test
+	public void it_displays_a_welcome_message_on_startup() {
+		assertThat(calc.getCurrentMessages()[0], equalTo("Welcome to the Java RPN calculator"));
+	}
+	
+	@Test
+	public void it_displays_a_goodbye_message_on_shutdown() {
+		calc.enter("q");
+		assertThat(calc.getCurrentMessages()[0], equalTo("Goodbye!"));
+	}
+	
+	@Test
+	public void it_complains_when_an_unknown_non_numeric_value_is_entered() {
+		calc.enter("2");
+		calc.enter("3");
+		calc.enter("X");
+		assertThat(calc.getCurrentMessages()[0], equalTo("Unrecognized input 'X'"));
 	}
 
 }
