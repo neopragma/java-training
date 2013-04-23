@@ -1,0 +1,66 @@
+<project name="rpncalculator" default="test" basedir=".">
+
+  <property name="base.dir"         value="."/>
+  <property name="build.dir"        value="bin"/>
+  <property name="source.dir"       value="${base.dir}/src/main/java"/>
+  <property name="test.source.dir"  value="${base.dir}/src/test/java"/>
+  <property name="test.reports.dir" value="${build.dir}/reports"/>
+  <property name="lib"              value="${base.dir}/lib"/>
+  <property name="project_name"     value="rpncalculator"/>
+  <property name="jar"              value="${build.dir}/calc.jar"/>
+  <property name="mainclass"        value="calc.sample.Calc"/>
+	
+  <path id="class.path">
+    <fileset dir="${lib}">
+    	<include name="**/**.jar"/>
+    </fileset>
+    <pathelement path="${build.dir}"/>
+  </path>
+
+  <target name="clean">
+	<delete dir="${build.dir}"/>
+  </target>
+
+  <target name="prepare" depends="clean">
+  	<mkdir dir="${build.dir}"/>
+  	<mkdir dir="${test.reports.dir}"/>
+    <tstamp/>
+  </target>
+
+  <target name="compile" depends="prepare">
+    <javac destdir="${build.dir}" source="1.6" includeantruntime="false">
+	  <src path="${source.dir}"/>
+	  <classpath refid="class.path"/>
+	</javac>
+  </target>
+
+  <target name="compile-tests" depends="compile">
+    <javac destdir="${build.dir}" source="1.6" includeantruntime="false">
+      <src path="${test.source.dir}"/>
+      <classpath refid="class.path"/>
+    </javac>
+  </target>
+	
+  <target name="test" depends="compile-tests">
+    <junit printsummary="on" fork="false" haltonfailure="true" showoutput="yes">
+      <classpath refid="class.path"/>
+      <formatter type="xml"/>
+      <batchtest todir="${test.reports.dir}">
+        <fileset dir="${test.source.dir}">
+          <include name="**/**Test*.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="jar" depends="test">
+    <jar basedir="${base.dir}" 
+         jarfile="${base.dir}/calc.jar" 
+         includes="**/**.class">
+      <manifest>
+    	<attribute name="Main-Class" value="calc.sample.Calc" />
+      </manifest>
+    </jar>
+  </target>
+
+</project>
