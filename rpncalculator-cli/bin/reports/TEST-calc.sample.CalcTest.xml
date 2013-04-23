@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="ubuntu" name="calc.sample.CalcTest" tests="17" time="0.069" timestamp="2013-02-06T15:33:46">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc." />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.management.compiler" value="HotSpot Client Compiler" />
+    <property name="lib" value="./lib" />
+    <property name="os.name" value="Linux" />
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/resources.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/rt.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/jsse.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/jce.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/charsets.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/netx.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/plugin.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/rhino.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/modules/jdk.boot.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/classes" />
+    <property name="test.reports.dir" value="bin/reports" />
+    <property name="TODAY" value="February 6 2013" />
+    <property name="sun.desktop" value="gnome" />
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="ant.home" value="/usr/share/ant" />
+    <property name="java.runtime.version" value="1.6.0_24-b24" />
+    <property name="user.name" value="neopragma" />
+    <property name="ant.file.rpncalculator" value="/home/neopragma/projects/rpn/java/rpncalculator/build.xml" />
+    <property name="build.dir" value="bin" />
+    <property name="user.language" value="en" />
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386" />
+    <property name="ant.project.default-target" value="test" />
+    <property name="ant.project.name" value="rpncalculator" />
+    <property name="DSTAMP" value="20130206" />
+    <property name="java.version" value="1.6.0_24" />
+    <property name="user.timezone" value="" />
+    <property name="sun.arch.data.model" value="32" />
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/endorsed" />
+    <property name="jar" value="bin/calc.jar" />
+    <property name="sun.cpu.isalist" value="" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="file.separator" value="/" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="java.class.version" value="50.0" />
+    <property name="ant.file.type.rpncalculator" value="file" />
+    <property name="user.country" value="US" />
+    <property name="java.home" value="/usr/lib/jvm/java-6-openjdk-i386/jre" />
+    <property name="java.vm.info" value="mixed mode, sharing" />
+    <property name="ant.file" value="/home/neopragma/projects/rpn/java/rpncalculator/build.xml" />
+    <property name="os.version" value="3.2.0-37-generic-pae" />
+    <property name="project_name" value="rpncalculator" />
+    <property name="path.separator" value=":" />
+    <property name="java.vm.version" value="20.0-b12" />
+    <property name="ant.library.dir" value="/usr/share/ant/lib" />
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="user.home" value="/home/neopragma" />
+    <property name="java.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386:/usr/lib/jvm/java-6-openjdk-i386/jre/../lib/i386:/usr/java/packages/lib/i386:/usr/lib/i386-linux-gnu/jni:/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:/usr/lib/jni:/lib:/usr/lib" />
+    <property name="java.vendor.url" value="http://java.sun.com/" />
+    <property name="java.vm.vendor" value="Sun Microsystems Inc." />
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+    <property name="sun.java.command" value="org.apache.tools.ant.launch.Launcher -cp  test" />
+    <property name="java.class.path" value="/usr/share/ant/lib/ant-launcher.jar:/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar:/usr/share/ant/lib/ant-apache-log4j.jar:/usr/share/ant/lib/ant-apache-bsf.jar:/usr/share/ant/lib/ant-apache-oro.jar:/usr/share/ant/lib/ant-apache-xalan2.jar:/usr/share/ant/lib/ant-apache-regexp.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-jdepend.jar:/usr/share/ant/lib/ant-jmf.jar:/usr/share/ant/lib/ant-commons-logging.jar:/usr/share/ant/lib/ant-jsch.jar:/usr/share/ant/lib/ant-launcher.jar:/usr/share/ant/lib/ant-swing.jar:/usr/share/ant/lib/ant-antlr.jar:/usr/share/ant/lib/ant-javamail.jar:/usr/share/ant/lib/ant-commons-net.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-apache-resolver.jar:/usr/share/ant/lib/ant-junit4.jar:/usr/share/ant/lib/ant-testutil.jar:/usr/share/ant/lib/ant-apache-bcel.jar:/usr/lib/jvm/java-6-openjdk-i386/lib/tools.jar" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.8.2 compiled on December 3 2011" />
+    <property name="TSTAMP" value="0733" />
+    <property name="mainclass" value="calc.sample.Calc" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="ant.file.type" value="file" />
+    <property name="java.vm.specification.version" value="1.0" />
+    <property name="base.dir" value="." />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="java.io.tmpdir" value="/tmp" />
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi" />
+    <property name="os.arch" value="i386" />
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/ext:/usr/java/packages/lib/ext" />
+    <property name="test.source.dir" value="./src/test/java" />
+    <property name="user.dir" value="/home/neopragma/projects/rpn/java/rpncalculator" />
+    <property name="line.separator" value="&#xa;" />
+    <property name="java.vm.name" value="OpenJDK Client VM" />
+    <property name="basedir" value="/home/neopragma/projects/rpn/java/rpncalculator" />
+    <property name="ant.java.version" value="1.6" />
+    <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="source.dir" value="./src/main/java" />
+    <property name="java.specification.version" value="1.6" />
+    <property name="ant.project.invoked-targets" value="test" />
+  </properties>
+  <testcase classname="calc.sample.CalcTest" name="it_adds_two_integers" time="0.005" />
+  <testcase classname="calc.sample.CalcTest" name="it_subtracts_two_integers" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_multiplies_two_integers" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_divides_one_integer_by_another" time="0.002" />
+  <testcase classname="calc.sample.CalcTest" name="it_finds_the_modulus_of_an_integer" time="0.001" />
+  <testcase classname="calc.sample.CalcTest" name="it_finds_the_exponent_of_an_integer" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_adds_two_real_numbers" time="0.001" />
+  <testcase classname="calc.sample.CalcTest" name="it_subtracts_two_real_numbers" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_multiplies_two_real_numbers" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_divides_one_real_number_by_another" time="0.001" />
+  <testcase classname="calc.sample.CalcTest" name="it_finds_the_exponent_of_real_number" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_clears_its_memory_when_requested" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_reports_wrong_number_of_arguments_when_fewer_than_2_values_are_entered" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_reports_wrong_number_of_arguments_when_more_than_2_values_are_entered" time="0.001" />
+  <testcase classname="calc.sample.CalcTest" name="it_ignores_null_entries" time="0.0" />
+  <testcase classname="calc.sample.CalcTest" name="it_ignores_empty_entries" time="0.001" />
+  <testcase classname="calc.sample.CalcTest" name="it_displays_welcome_message_when_it_starts_and_goodbye_when_it_ends" time="0.0" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

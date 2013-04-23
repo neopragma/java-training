@@ -1,0 +1,4 @@
+Flushing results...
+Flushing results done
+Cobertura: Loaded information on 1 classes.
+Cobertura: Saved information on 1 classes.
