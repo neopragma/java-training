@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 16: Command-line RPN Calculator</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-15-debrief.html" title="previous">&lt;= Unit 15: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-16-debrief.html" title="next">Unit 16: Debrief =&gt;</a>
+<h1>Unit 14: RPN Calculator</h1>
+<p>
+The goal of this unit is to develop a command-line interface for RPN Calculator you created in Unit 14. You will also use Maven to produce an <em>executable jar</em> file.
+</p>
+<p>
+The base <span class="code">rpncalculator-cli</span> project is available on <a href="https://github.com/neopragma/java-training" target="_blank">github.com/neopragma/java-training</a>.
+</p>
+<h2>User Story</h2>
+<p>
+The user story for this unit is given below. Most of the scenarios were already covered in Unit 14. When we modify existing functionality, we include all the scenarios that pertain to that functionality, including both current features that will not change and new or changed features. This helps us guard against <em>regressions</em> - functionality that worked before but that we accidentally &quot;break&quot; in the course of making changes to the code.
+</p>
+<p>
+<div class="code box">
+<pre>
+  Feature: As a person who likes numbers, I want a Reverse Polish Notation calculator that runs as a command-line application so that I can perform arithmetic operations.
+
+  Scenario: Adding two integers
+    Given I enter "5", "3", and "+"
+    When I get the result
+    Then the calculator returns "8"
+
+  Scenario: Subtracting two integers
+    Given I enter "5", "3", and "-"
+    When I get the result
+    Then the calculator returns "2"
+
+  Scenario: Multiplying two integers
+    Given I enter "5", "3", and "*"
+    When I get the result
+    Then the calculator returns "15"
+
+  Scenario: Dividing two integers
+    Given I enter "54", "13", and "/"
+    When I get the result
+    Then the calculator returns "4" plus or minus "0.5"
+
+  Scenario: Modulus
+    Given I enter "54", "13", and "%"
+    When I get the result
+    Then the calculator returns "2"
+
+  Scenario: Exponentiation
+    Given I enter "4", "3", and "^"
+    When I get the result
+    Then the calculator returns "64"
+
+  Scenario: Adding two real numbers
+    Given I enter "5.3", "3.6", and "+"
+    When I get the result
+    Then the calculator returns "8.9"
+
+  Scenario: Subtracting two real numbers
+    Given I enter "5.3", "3.6", and "-"
+    When I get the result
+    Then the calculator returns "1.7"
+
+  Scenario: Multiplying two real numbers
+    Given I enter "5.3", "3.6", and "*"
+    When I get the result
+    Then the calculator returns "19.08"
+
+  Scenario: Dividing two real numbers
+    Given I enter "54.75", "13.6", and "/"
+    When I get the result
+    Then the calculator returns "4.0257" plus or minus "0.0005"
+
+  Scenario: Exponentiation - real number
+    Given I enter "5.5", "3", and "^"
+    When I get the result
+    Then the calculator returns "166.375" plus or minus "0.0005"
+
+  Scenario: Clearing memory
+    Given I enter "2"
+    When I get the result
+    Then the calculator returns "2"
+
+    Given I enter "c"
+    When I get the result
+    Then the calculator returns ""  
+
+  Scenario: Ignoring null entries
+    Given I enter "2", "", "6", "*"
+    When I get the result
+    Then the calculator returns "12"
+
+  Scenario: Too few arguments are entered
+    Given I enter "2"
+    When I enter "+"
+    Then the calculator reports "Wrong number of arguments for '+' operator"
+
+  Scenario: Too few arguments are entered
+    Given I enter "2", "4", "6"
+    When I enter "*"
+    Then the calculator reports "Wrong number of arguments for '*' operator"
+
+  Scenario: Welcome message
+    When I start the calculator
+    Then it displays a welcome message
+
+  Scenario: Goodbye message
+    Given the calculator is running
+    When I enter "q"
+    Then it displays a goodbye message
+</pre>
+</div>
+</p>
+<p>
+</p>
+</body>
+</html>
