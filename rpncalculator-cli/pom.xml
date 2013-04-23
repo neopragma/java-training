@@ -6,8 +6,8 @@
     <artifactId>rpncalculator</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1</version>
-    <name>RPN Calculator</name>
-    <description>Reverse Polish Notation Calculator</description>
+    <name>Command Line RPN Calculator</name>
+    <description>Command line driver for RPN Calculator</description>
     <url>http://github.com/neporagma/java-training</url>
     <inceptionYear>2013</inceptionYear>
     <organization>

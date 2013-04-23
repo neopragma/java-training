@@ -1,5 +1,5 @@
 package calc.sample;
-    
+
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.equalTo;

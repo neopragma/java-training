@@ -1,4 +1,28 @@
-Flushing results...
-Flushing results done
-Cobertura: Loaded information on 1 classes.
-Cobertura: Saved information on 1 classes.
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Wrong number of arguments for the '+' operator
+in getCurrentMessages(), first message is Wrong number of arguments for the '+' operator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Wrong number of arguments for the '*' operator
+in getCurrentMessages(), first message is Wrong number of arguments for the '*' operator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is c clear calculator memory
+in getCurrentMessages(), first message is c clear calculator memory
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in getCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Welcome to the Java RPN calculator
+in setCurrentMessages(), first message is Goodbye!
+in getCurrentMessages(), first message is Goodbye!
