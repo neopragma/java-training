@@ -2,7 +2,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.farmteam</groupId>
+    <groupId>calc.sample</groupId>   
     <artifactId>rpncalculator</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1</version>
@@ -67,9 +67,56 @@
             <version>2.13</version>
             <type>maven-plugin</type>
         </dependency>
+        <dependency>
+            <groupId>calc.sample</groupId>
+            <artifactId>rpncalculator</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
+<!--     
+    <repositories>
+        <repository>
+            <id>repo</id>
+                <releases>
+                    <enabled>true</enabled>
+                    <checksumPolicy>ignore</checksumPolicy>
+                </releases>
+                <snapshots>
+                    <enabled>false</enabled>
+                </snapshots>
+                <url>file://${project.basedir}/repo</url>
+            </repository>
+    </repositories>
+-->    
+    
+    
     <build>
         <plugins>
+        
+         <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>calc.cli.sample.CalcCliDriver</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+        
+       
+        
+        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

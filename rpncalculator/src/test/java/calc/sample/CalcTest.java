@@ -1,5 +1,5 @@
 package calc.sample;
-
+       
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.equalTo;
@@ -63,6 +63,17 @@ public class CalcTest {
 		calc.enter("3");
 		calc.enter("^");
 		assertThat(calc.result(), equalTo("64"));
+	}
+
+	@Test
+	public void it_finds_the_result_of_a_complex_expression() {
+	// This is: (1 + 2) x 3
+		calc.enter("3");
+		calc.enter("2");
+		calc.enter("1");
+		calc.enter("+");
+		calc.enter("*");
+		assertThat(calc.result(), equalTo("9"));
 	}
 
 	@Test
@@ -132,22 +143,6 @@ public class CalcTest {
 	}
 	
 	@Test
-	public void it_complains_when_too_few_arguments_are_passed() {
-		calc.enter("2");
-		calc.enter("+");
-		assertThat(calc.getCurrentMessages()[0], equalTo("Wrong number of arguments for the '+' operator"));
-	}
-		
-	@Test
-	public void it_complains_when_too_many_arguments_are_passed() {
-		calc.enter("2");
-		calc.enter("4");
-		calc.enter("6");
-		calc.enter("*");
-		assertThat(calc.getCurrentMessages()[0], equalTo("Wrong number of arguments for the '*' operator"));
-	}
-	
-	@Test
 	public void it_returns_an_array_of_help_messages_when_help_is_requested() {
 		String[] expectedHelpMessages = {
 			"c clear calculator memory",
@@ -162,17 +157,6 @@ public class CalcTest {
 			"^ exponentiation" };
 		calc.enter("h");
 		assertThat(calc.getCurrentMessages(), equalTo(expectedHelpMessages));
-	}
-	
-	@Test
-	public void it_displays_a_welcome_message_on_startup() {
-		assertThat(calc.getCurrentMessages()[0], equalTo("Welcome to the Java RPN calculator"));
-	}
-	
-	@Test
-	public void it_displays_a_goodbye_message_on_shutdown() {
-		calc.enter("q");
-		assertThat(calc.getCurrentMessages()[0], equalTo("Goodbye!"));
 	}
 	
 	@Test

@@ -2,52 +2,19 @@ package calc.cli.sample;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.containsString;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import org.junit.Test;
-
+    
 public class CalcCliTest {
 	
 	private PrintStream originalSystemOut;
 	private ByteArrayOutputStream systemOutData;
 	private PrintStream systemOutRedirect;
-	private InputStream originalSystemIn;
-
-	@Test
-	public void it_reports_wrong_number_of_arguments_when_fewer_than_2_values_are_entered() throws Exception {
-		loadSystemIn(new String[] { "2", "+" });
-		recordSystemOut();
-		CalcCliDriver.main(new String[] { "test" });
-		resetSystemOut();
-		resetSystemIn();
-		assertThat(playbackSystemOutAsString(), containsString("Wrong number of arguments for the '+' operator"));
-	}
-
-	@Test
-	public void it_reports_wrong_number_of_arguments_when_more_than_2_values_are_entered() throws Exception {
-		loadSystemIn(new String[] { "2", "4", "6", "*" });
-		recordSystemOut();
-		CalcCliDriver.main(new String[] { "test" });
-		resetSystemOut();
-		resetSystemIn();
-		assertThat(playbackSystemOutAsString(), containsString("Wrong number of arguments for the '*' operator"));
-	}
-
-	@Test
-	public void it_complains_about_invalid_non_numeric_input_values() throws Exception {
-		loadSystemIn(new String[] { "2", "4", "X" });
-		recordSystemOut();
-		CalcCliDriver.main(new String[] { "test" });
-		resetSystemOut();
-		resetSystemIn();
-		assertThat(playbackSystemOutAsString(), containsString("Unrecognized input 'X'"));
-	}
 	
 	@Test
 	public void it_displays_welcome_message_when_it_starts_and_goodbye_when_it_ends() throws Exception {
@@ -56,6 +23,33 @@ public class CalcCliTest {
 		CalcCliDriver.main(new String[] { "test" });
 		resetSystemOut();
 		assertThat(playbackSystemOutAsString(), equalTo("Welcome to the Java RPN calculator\nGoodbye!"));
+	}
+	
+	@Test
+	public void it_displays_usage_help_when_user_enters_h() throws Exception {
+		recordSystemOut();
+		loadSystemIn(new String[] { "h" });
+		CalcCliDriver.main(new String[] { "test" });
+		resetSystemOut();
+		assertThat(playbackSystemOutAsString(), equalTo("Welcome to the Java RPN calculator\nc clear calculator memory\nh display help text\nq quit\nr display current result\n+ add\n- subract\n* multiply\n/ divide\n% modulo\n^ exponentiation"));
+	}
+	
+	@Test
+	public void it_displays_the_result_of_the_calculation_when_user_enters_r() throws Exception {
+		recordSystemOut();
+		loadSystemIn(new String[] { "3", "2", "1", "+", "*", "r" });
+		CalcCliDriver.main(new String[] { "test" });
+		resetSystemOut();
+		assertThat(playbackSystemOutAsString(), equalTo("Welcome to the Java RPN calculator\n9"));
+	}
+	
+	@Test
+	public void it_clears_its_memory_when_user_enters_c() throws Exception {
+		recordSystemOut();
+		loadSystemIn(new String[] { "3", "2", "1", "+", "*", "c", "18", "6", "-", "r" });
+		CalcCliDriver.main(new String[] { "test" });
+		resetSystemOut();
+		assertThat(playbackSystemOutAsString(), equalTo("Welcome to the Java RPN calculator\n12"));
 	}
 	
 	private void recordSystemOut() {
@@ -78,7 +72,6 @@ public class CalcCliTest {
     }
     
     private void loadSystemIn(String[] linesToLoadInSystemIn) {
-    	originalSystemIn = System.in;
     	ByteArrayOutputStream fakeSystemIn = new ByteArrayOutputStream();
     	try {
     		for (String line : linesToLoadInSystemIn) {
@@ -90,9 +83,5 @@ public class CalcCliTest {
 		}
     	ByteArrayInputStream systemIn = new ByteArrayInputStream(fakeSystemIn.toByteArray());
     	System.setIn(systemIn);
-    }
-    
-    private void resetSystemIn() {
-    	System.setIn(originalSystemIn);
     }
 }
