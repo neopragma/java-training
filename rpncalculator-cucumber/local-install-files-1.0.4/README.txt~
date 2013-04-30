@@ -1,0 +1,12 @@
+The java_pageobject project is not yet available in the maven central repository.
+
+Until it has been added to the central repository, add it to your project like this:
+
+1. Copy the jar file and the script, mvn-local-install, to any convenient location on your system.
+
+2. Run the script, mvn-local-install. This will install the jar in your local maven repository, 
+located at [home]/.m2/repository
+
+3. Add the contents of the file, dependency.xml, to your project pom.xml file. 
+
+To make the jar available to tools other than maven, use the procedures that normally apply to those tools.

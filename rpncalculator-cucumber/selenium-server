@@ -1,0 +1,45 @@
+#!/bin/bash
+# ================================================== 
+# Start and stop Selenium standalone server
+#
+# Version 1.0
+# Dave Nicolette
+# License:
+# Creative Commons Attribution-ShareAlike 3.0 Unported
+# See http://creativecommons.org/licenses/by-sa/3.0/
+# ==================================================
+DISPLAY_NAME="Selenium Standalone Server"
+PID_FILE="./selenium-pid"
+START_COMMAND="java -jar selenium-server-standalone-2.32.0.jar"
+PORT="8080"
+
+if [ ! ${DISPLAY_NAME:+x} ] || [ "$1" = "-h" ]
+then
+    echo
+    echo "Usage:"
+    echo -e "\t[scriptname]\t\t- starts the server"
+    echo -e "\t[scriptname] stop\t- stops the server"
+    echo 
+    echo "Configuration:"
+    echo
+    echo "1. Copy the template file 'stop-start' and name the copy as you please."
+    echo "2. Make the copy executable."
+    echo "3. set DISPLAY_NAME to the text you want to see on startup and shutdown."
+    echo "4. set PID_FILE to the full path of a file to store the PID on startup."
+    echo "5. set START_COMMAND to the command to start the server."
+    echo "6. set PORT to the port number on which the server listens."
+    echo
+    exit 0
+fi    
+if [ "$1" = "stop" ]
+then
+    echo "Stopping $DISPLAY_NAME"
+    kill -9 $(head -n 1 $PID_FILE)
+    rm $PID_FILE
+else
+  echo "Starting $DISPLAY_NAME"
+  eval $START_COMMAND 1>/dev/null 2>&1 &
+  sleep 2
+  netstat -tulpn | grep ":$PORT" | awk -F"LISTEN" '{split($2,a,"/");print a[1]}' | sed -e 's/^[ \t]*//' > $PID_FILE
+  echo "pid is $(head -n 1 $PID_FILE)"
+fi

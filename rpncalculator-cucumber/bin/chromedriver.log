@@ -1,0 +1,227 @@
+[0.000][INFO]:      ChromeDriver 26.0.1383.0 /home/neopragma/bin/chromedriver
+[0.652][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.switches": [  ],
+   "chromeOptions": {
+      "args": [  ],
+      "extensions": [  ]
+   },
+   "platform": "ANY",
+   "version": ""
+}
+
+[0.669][INFO]:      Launching chrome: /opt/google/chrome/google-chrome --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --disable-background-networking --disable-sync --disable-translate --disable-web-resources --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --enable-logging --log-level=1 --password-store=basic --ignore-certificate-errors about:blank
+[3.850][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.172
+[4.021][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0)
+[4.022][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "26.0.1383.0",
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "linux",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "25.0.1364.172",
+      "webStorageEnabled": true
+   }
+}
+
+[4.073][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080"
+}
+
+[4.074][FINER]:     Waiting for all views to stop loading...
+[4.074][FINER]:     Done waiting for all views to stop loading
+[4.131][FINER]:     Waiting for all views to stop loading...
+[4.142][FINER]:     Done waiting for all views to stop loading
+[4.142][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[4.146][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[4.146][FINER]:     Waiting for all views to stop loading...
+[4.148][FINER]:     Done waiting for all views to stop loading
+[4.161][FINER]:     Waiting for all views to stop loading...
+[4.162][FINER]:     Done waiting for all views to stop loading
+[4.162][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+
+[4.717][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080/hello.html"
+}
+
+[4.717][FINER]:     Waiting for all views to stop loading...
+[5.011][FINER]:     Done waiting for all views to stop loading
+[5.052][FINER]:     Waiting for all views to stop loading...
+[5.064][FINER]:     Done waiting for all views to stop loading
+[5.064][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[5.066][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[5.066][FINER]:     Waiting for all views to stop loading...
+[5.067][FINER]:     Done waiting for all views to stop loading
+[5.072][FINER]:     Waiting for all views to stop loading...
+[5.073][FINER]:     Done waiting for all views to stop loading
+[5.073][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+
+[5.089][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080/hello.html"
+}
+
+[5.089][FINER]:     Waiting for all views to stop loading...
+[5.090][FINER]:     Done waiting for all views to stop loading
+[5.130][FINER]:     Waiting for all views to stop loading...
+[5.137][FINER]:     Done waiting for all views to stop loading
+[5.137][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[5.139][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[5.139][FINER]:     Waiting for all views to stop loading...
+[5.143][FINER]:     Done waiting for all views to stop loading
+[5.147][FINER]:     Waiting for all views to stop loading...
+[5.147][FINER]:     Done waiting for all views to stop loading
+[5.147][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+
+[5.155][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080/hello.html"
+}
+
+[5.160][FINER]:     Waiting for all views to stop loading...
+[5.160][FINER]:     Done waiting for all views to stop loading
+[5.197][FINER]:     Waiting for all views to stop loading...
+[5.205][FINER]:     Done waiting for all views to stop loading
+[5.205][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[5.207][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[5.207][FINER]:     Waiting for all views to stop loading...
+[5.210][FINER]:     Done waiting for all views to stop loading
+[5.216][FINER]:     Waiting for all views to stop loading...
+[5.216][FINER]:     Done waiting for all views to stop loading
+[5.216][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+
+[5.235][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080/hello.html"
+}
+
+[5.235][FINER]:     Waiting for all views to stop loading...
+[5.235][FINER]:     Done waiting for all views to stop loading
+[5.276][FINER]:     Waiting for all views to stop loading...
+[5.283][FINER]:     Done waiting for all views to stop loading
+[5.283][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[5.285][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[5.285][FINER]:     Waiting for all views to stop loading...
+[5.289][FINER]:     Done waiting for all views to stop loading
+[5.293][FINER]:     Waiting for all views to stop loading...
+[5.293][FINER]:     Done waiting for all views to stop loading
+[5.293][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+
+[5.304][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080/hello.html"
+}
+
+[5.304][FINER]:     Waiting for all views to stop loading...
+[5.304][FINER]:     Done waiting for all views to stop loading
+[5.359][FINER]:     Waiting for all views to stop loading...
+[5.366][FINER]:     Done waiting for all views to stop loading
+[5.366][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[5.370][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[5.370][FINER]:     Waiting for all views to stop loading...
+[5.370][FINER]:     Done waiting for all views to stop loading
+[5.376][FINER]:     Waiting for all views to stop loading...
+[5.376][FINER]:     Done waiting for all views to stop loading
+[5.376][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+
+[5.382][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/url) with params {
+   "url": "http://localhost:8080/hello.html"
+}
+
+[5.382][FINER]:     Waiting for all views to stop loading...
+[5.383][FINER]:     Done waiting for all views to stop loading
+[5.424][FINER]:     Waiting for all views to stop loading...
+[5.434][FINER]:     Done waiting for all views to stop loading
+[5.434][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/url) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[5.436][FINE]:      Command received (/session/1d5587815295ce88400ae7e2a669e5f0/title)
+[5.436][FINER]:     Waiting for all views to stop loading...
+[5.442][FINER]:     Done waiting for all views to stop loading
+[5.445][FINER]:     Waiting for all views to stop loading...
+[5.445][FINER]:     Done waiting for all views to stop loading
+[5.445][FINE]:      Command finished (/session/1d5587815295ce88400ae7e2a669e5f0/title) with response {
+   "sessionId": "1d5587815295ce88400ae7e2a669e5f0",
+   "status": 0,
+   "value": "data:text/html,chromewebdata"
+}
+

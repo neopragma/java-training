@@ -1,0 +1,7 @@
+mvn install:install-file \
+  -DgroupId=com.neopragma \
+  -DartifactId=java_pageobject \
+  -Dpackaging=jar \
+  -Dversion=1.0.4 \
+  -Dfile=java_pageobject-1.0.4.jar \
+  -DgeneratePom=true

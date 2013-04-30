@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<title>Unit 17: Webapp Using Wicket</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+</style>
+</head>
+<body>
+<a href="unit-16-debrief.html" title="previous">&lt;= Unit 16: Debrief</a> |<a href="index.html" title="home"> Top</a> |  <a href="unit-17-debrief.html" title="next">Unit 17: Debrief =&gt;</a>
+<h1>Unit 17: Webapp Using Wicket</h1>
+<p>
+The goals of this unit are:
+<ol>
+<li>Develop a Web interface for RPN Calculator you created in Unit 14 using the webapp framework, Wicket.</li>
+<li>See how the acceptance criteria for user stories written in Gherkin (Given-When-Then format) can be automated.</li>
+</ol>
+</p>
+<h2>Setup</h2>
+<p>
+Get the projects <span class="code">rpncalculator-wicket</span> and <span class="code">rpncalculator-cucumber</span> from <a href="https://github.com/neopragma/java-training" target="_blank">github.com/neopragma/java-training</a>.
+</p>
+<p>
+Install <span class="code">page-object</span> to your local Maven repository. If you are using Linux or Unix (including Mac OSX), run the script <span class="code">mvn-install-local</span> in the <span class="code">rpncalculator-cucumber/local-install-files-1.0.4</span> directory. If you are using Windows, you can copy the contents of <span class="code">mvn-install-local</span> to a command line and execute it.
+</p>
+<p>
+Follow the instructions on <a href="http://docs.seleniumhq.org/docs/05_selenium_rc.jsp" target="_blank">http://docs.seleniumhq.org/docs/05_selenium_rc.jsp</a> to install the Selenium Standalone Server on your platform.
+</p>
+<p>
+Follow the instructions on <a href="https://code.google.com/p/selenium/wiki/ChromeDriver" target="_blank">https://code.google.com/p/selenium/wiki/ChromeDriver</a> to install the Selenium ChromeDriver on your platform.
+</p>
+<h2>Web applications (webapps)</h2>
+<p>
+The World Wide Web is based on a protocol known as <em>Hypertext Transfer Protocol</em>, or HTTP. HTTP is fully described in RFC 2616, available at <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank">http://www.w3.org/Protocols/rfc2616/rfc2616.html</a>.
+</p>
+<p>
+HTTP is a <em>client-server</em> protocol. That means two parties participate in an exchange of information using HTTP; one party is the <em>client</em> and the other is the <em>server</em>. The client makes <em>requests</em> of the server, and the server replies to the requests by sending a <em>response</em> to the client.
+</p>
+<p>
+There are two main parts of an HTTP message that application developers need to understand:
+<ul>
+<li>Method</li>
+<li>URI</li>
+</ul>
+</p>
+<p>
+The <em>method</em> specifies the type of request the client is making. Possible values are:
+<ul>
+<li>CONNECT</li>
+<li>HEAD</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+<li>GET</li>
+<li>PUT</li>
+<li>POST</li>
+<li>DELETE</li>
+</ul>
+</p>
+<p>
+Application developers are mainly concerned with PUT, GET, POST, and DELETE. These methods correspond roughly to the four operations of the CRUD model - Create, Read, Update, and Delete:
+<ul>
+<li>PUT is like Create</li>
+<li>GET is like Read</li>
+<li>POST is like Update</li>
+<li>DELETE is like Delete</li>
+</ul>
+</p>
+<p>
+URI stands for <em>Uniform Resource Identifier</em>. It is the standard way that clients identify the resources they want from Web servers. URI is also known as URL, or <em>Uniform Resource Locator</em>.
+</p>
+<p>
+Basically, then, a client requests a resource from a server by specifying the <em>method</em> and the <em>URI</em>. 
+</p>
+<h2>Webapp Architectures</h2>
+<p>
+Three architectural patterns have become commonplace for webapps:
+<ul>
+<li>Model-View-Controller (MVC) or Model 2</li>
+<li>Hierarchical</li>
+<li>Representational State Transfer (REST)</li>
+</ul>
+<p>
+The choice of architectural pattern depends on the nature of the application you need to develop. The details are beyond the scope of this unit. Suffice it to say that there are different webapp frameworks that support different architectural patterns. Choosing one that is suited to your problem can make your life easier.
+</p>
+<h2>Webapp Frameworks</h2>
+<p>
+Because HTTP is standardized, all webapps must format and interpret HTTP requests and responses in the same way. As a result, quite a bit of the processing necessary in a webapp is always the same. To avoid re-inventing the wheel with each new webapp, people have created <em>frameworks</em> that perform some or most of the common operations needed in a webapp. 
+</p>
+<p>
+When we develop a business application as a webapp, we almost never write the entire application from scratch. We almost always choose a webapp framework that is suited to the problem domain and add custom logic as needed to complete our application.
+</p>
+<p>
+For Java specifically, certain standard APIs have been developed that facilitate the creation of webapps. Webapp frameworks are built on these APIs, and provide additional functionality beyond the basic APIs. The primary API for webapp developers to know is the <em>servlet</em> API. A servlet encapsulates methods that make it easy to create and work with standard HTTP request and response objects and related facilities.
+</p>
+<p>
+Webapp frameworks range from <em>low-magic, high-sweat</em> to <em>high-magic, low-sweat</em>. The low-magic, high-sweat frameworks do not provide much functionality above and beyond basic HTTP support. They are suitable for applications that require a high degree of customization, or that need to be deployed in a &quot;lightweight&quot; environment. 
+</p>
+<p>
+The high-magic, low-sweat frameworks are designed to enable us to produce a run-of-the-mill application of a given type without much custom coding. They are suitable for applications that align with their particular design assumptions and that do not require much customization. 
+</p>
+<p>
+The webapp framework we will use in this unit falls approximately in the middle of this spectrum. It is based on a hierarchical architectural pattern, and it can be used to create an MVC or RESTful application, as well. 
+</p>
+<h2>User Story</h2>
+<p>
+The user story for this unit is given below. 
+</p>
+<p>
+<div class="code box">
+<pre>
+Feature: As a person who likes numbers, 
+  I want a Reverse Polish Notation calculator 
+  so that I can perform arithmetic operations.
+  
+  Scenario: The welcome message is displayed
+    Given I am on the RPN Calculator page
+    Then the welcome message reads "Welcome to the Java RPN calculator"    
+
+  Scenario: Adding two integers
+    Given I enter "5 3 +"
+    When I get the result
+    Then the calculator returns "8"
+    
+ 
+  Scenario: Subtracting two integers
+    Given I enter "5 3 -"
+    When I get the result
+    Then the calculator returns "2"
+
+  Scenario: Multiplying two integers
+    Given I enter "5 3 *"
+    When I get the result
+    Then the calculator returns "15"
+
+  Scenario: Dividing two integers
+    Given I enter "54 13 /"
+    When I get the result
+    Then the calculator returns "4" plus or minus "0.5"
+
+  Scenario: Modulus
+    Given I enter "54 13 %"
+    When I get the result
+    Then the calculator returns "2"
+
+  Scenario: Exponentiation
+    Given I enter "4 3 ^"
+    When I get the result
+    Then the calculator returns "64"
+
+  Scenario: Adding two real numbers
+    Given I enter "5.3 3.6 +"
+    When I get the result
+    Then the calculator returns "8.9"
+
+  Scenario: Subtracting two real numbers
+    Given I enter "5.3 3.6 -"
+    When I get the result
+    Then the calculator returns "1.7"
+
+  Scenario: Multiplying two real numbers
+    Given I enter "5.3 3.6 *"
+    When I get the result
+    Then the calculator returns "19.08"
+
+  Scenario: Dividing two real numbers
+    Given I enter "54.75 13.6 /"
+    When I get the result
+    Then the calculator returns "4.0257" plus or minus "0.0005"
+
+  Scenario: Exponentiation - real number
+    Given I enter "5.5 3 ^"
+    When I get the result
+    Then the calculator returns "166.375" plus or minus "0.0005"
+
+  Scenario: Clearing memory
+    Given I enter "2"
+    When I get the result
+    Then the calculator returns "2"
+
+    Given I enter "4 5 c"
+    When I get the result
+    Then the calculator returns ""  
+</pre>
+</div>
+</p>
+<h2>Cucumber</h2>
+<p>
+Until now, we have been using Gherkin as a way to specify the acceptance criteria for our user stories. Other formats are possible, and are arguably just as understandable. Why Gherkin, then? The reason is that Gherkin can be automated. That gives us a way to validate our functionality automatically, and also provides a way to extend the notion of <em>test driving</em> our code to the level of acceptance tests. That is, we can create executable specifications that serve as both the &quot;requirements&quot; and the &quot;acceptance tests&quot; at the same time. This is a powerful way to avoid defects and regressions.
+</p>
+<p>
+Cucumber is a tool that can parse Gherkin statements and enable us to automate them. In this unit we will use the Java implementation of Cucumber for this purpose. 
+</p>
+</body>
+</html>

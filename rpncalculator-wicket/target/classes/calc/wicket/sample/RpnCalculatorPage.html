@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>RPN Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+    <h1>RPN Calculator</h1>
+    <p>
+        <span wicket:id="welcomeMessage" id="welcomeMessage">&nbsp;</span>
+    </p>
+    
+    <form wicket:id="calcForm">
+        <input type="text" wicket:id="inputValues" id="inputValues" value="" size="50" />
+        <div class="keypad-row">
+            <input type="button" wicket:id="1" value="1" />
+            <input type="button" wicket:id="2" value="2" />
+            <input type="button" wicket:id="3" value="3" />
+            <input type="button" wicket:id="4" value="4" />
+            <input type="button" wicket:id="5" value="5" />
+            <input type="button" wicket:id="6" value="6" />
+            <input type="button" wicket:id="7" value="7" />
+            <input type="button" wicket:id="8" value="8" />
+            <input type="button" wicket:id="9" value="9" />
+            <input type="button" wicket:id="0" value="0" />
+            <input type="button" wicket:id="point" value="." />
+        </div>
+        <div class="keypad-row">
+            <input type="button" wicket:id="addition" value="+" />
+            <input type="button" wicket:id="subtraction" value="-" />
+            <input type="button" wicket:id="multiplication" value="*" />
+            <input type="button" wicket:id="division" value="/" />
+            <input type="button" wicket:id="modulus" value="%" />
+            <input type="button" wicket:id="exponentiation" value="^" />
+        </div>
+        <div class="keypad-row">
+            <input type="button" wicket:id="push" value="Push" />
+            <input type="button" wicket:id="clear" value="Clear" />
+            <input type="submit" wicket:id="submitButton" id="submitButton" value="Calculate" />
+            
+        </div>
+    </form>
+    <div>
+        Result: <span wicket:id="result" id="result">&nbsp;</span>
+    </div>
+
+</body>
+</html>
