@@ -1,5 +1,0 @@
-INDEX VERSION 1.126+/home/neopragma/projects/.metadata/.plugins/org.eclipse.jdt.core
-1951320571.index
-3521094279.index
-391070890.index
-3804387345.index
